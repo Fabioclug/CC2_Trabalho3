@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/ufscar.Compiladores2/src-gen" editDirectory="/ufscar.Compiladores2.edit/src"
+    editorDirectory="/ufscar.Compiladores2.editor/src" modelPluginID="ufscar.Compiladores2"
+    forceOverwrite="true" modelName="Musy" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="ufscar.Compiladores2.edit"
+    editorPluginID="ufscar.Compiladores2.editor" runtimeVersion="2.11">
+  <genPackages prefix="Musy" basePackage="ufscar.compiladores2" disposableProviderFactory="true"
+      fileExtensions="musy" ecorePackage="Musy.ecore#/">
+    <genClasses ecoreClass="Musy.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//Model/greetings"/>
+    </genClasses>
+    <genClasses ecoreClass="Musy.ecore#//Greeting">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//Greeting/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

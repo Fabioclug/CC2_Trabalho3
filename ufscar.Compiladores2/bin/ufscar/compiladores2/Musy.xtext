@@ -1,0 +1,75 @@
+grammar ufscar.compiladores2.Musy with org.eclipse.xtext.common.Terminals
+
+generate musy "http://www.compiladores2.ufscar/Musy"
+
+Midi:
+	'MIDI' name = ID '{' 
+	body = MidiBody '}'
+;
+
+MidiBody: 
+	param = Parameters
+	tracks += Track*
+;
+
+Parameters:
+	('BPM' ':' beat = BPM)?
+	('TIME_SIGNATURE' tsig = TimeSignature)?
+	('TIME_NOTE' ':' tn = Tn)?
+	('TIME_PAUSE' ':' tp = Tp)?
+	('OCTAVE' ':' octave = OCTAVE)?
+;
+
+Track:
+	'TRACK' name = ID '{'
+		tbody = TrackBody
+	'}'
+;
+
+TrackBody:
+	(note += NoteLetter | blocks += Block)*
+;
+
+Block:
+	'BLOCK' name = ID '{'
+	
+	'}'
+;
+
+TimeSignature:
+	SIGNATURE '/' SIGNATURE
+;
+
+Tp:
+	'sb'| 'm' | 'sm' | 'cl' | 'sc' | 'f' | 'sf'
+;
+
+Tn:
+	Tp
+;
+
+CustomNote:
+	Note '(' CustomNoteParam ')'
+;
+
+NoteLetter: 
+	'C' | 'D' | 'E' | 'F' | 'G' | 'A' | 'B'
+;
+
+Accident:
+	'#' | 'b'
+;
+
+Note: 
+	NoteLetter Accident?
+;
+
+CustomNoteParam:
+	OCTAVE ',' Tn | Tn ',' OCTAVE | OCTAVE | Tn
+;
+
+terminal SIGNATURE: '1'..'16';
+
+terminal OCTAVE: '1'..'8';
+
+terminal BPM: '1'..'500';
