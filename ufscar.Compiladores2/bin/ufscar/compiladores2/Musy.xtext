@@ -16,11 +16,17 @@ MidiBody:
 
 Parameter:
 	{Parameter}
-	('BPM' ':' beat = INT) type = "bpm" |
-	('TIME_SIGNATURE' ':' tsig = TimeSignature) type = "time_sig" |
-	('TIME_NOTE' ':' tn = Tn) type = "time_note" |
-	('TIME_PAUSE' ':' tp = Tp) type = "time_pause" |
-	('OCTAVE' ':' octave = INT) type = "octave"
+	('BPM' ':' beat = INT) |
+	('TIME_SIGNATURE' ':' tsig = TimeSignature) |
+	('TIME_NOTE' ':' tn = Tn)  |
+	('TIME_PAUSE' ':' tp = Tp) |
+	('OCTAVE' ':' octave = INT)
+
+//	('BPM' ':' beat = INT) type = "bpm" |
+//	('TIME_SIGNATURE' ':' tsig = TimeSignature) type = "time_sig" |
+//	('TIME_NOTE' ':' tn = Tn) type = "time_note" |
+//	('TIME_PAUSE' ':' tp = Tp) type = "time_pause" |
+//	('OCTAVE' ':' octave = INT) type = "octave"
 ;
 
 Track:
@@ -39,7 +45,7 @@ MoreTrackBody:
 ;
 
 BodyComponent:
-	cnote = CustomNote | note = Note | block = Block | chord = Chord
+	cnote = CustomNote | note = Note | block = Block | chord = Chord | interval = Interval 
 ;
 
 Block:
@@ -58,6 +64,10 @@ Tp:
 
 Tn:
 	Tp
+;
+
+Interval:
+	'I' '(' INT ')'	
 ;
 
 CustomNote:
