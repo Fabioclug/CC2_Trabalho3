@@ -25,7 +25,7 @@ public class MusyParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrPars
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Model";
+		return "Midi";
 	}
 	
 	public MusyGrammarAccess getGrammarAccess() {

@@ -37,9 +37,70 @@ public class MusyParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getGreetingAccess().getGroup(), "rule__Greeting__Group__0");
-					put(grammarAccess.getModelAccess().getGreetingsAssignment(), "rule__Model__GreetingsAssignment");
-					put(grammarAccess.getGreetingAccess().getNameAssignment_1(), "rule__Greeting__NameAssignment_1");
+					put(grammarAccess.getParameterAccess().getAlternatives(), "rule__Parameter__Alternatives");
+					put(grammarAccess.getBodyComponentAccess().getAlternatives(), "rule__BodyComponent__Alternatives");
+					put(grammarAccess.getTpAccess().getAlternatives(), "rule__Tp__Alternatives");
+					put(grammarAccess.getChordParamsAccess().getAlternatives_0(), "rule__ChordParams__Alternatives_0");
+					put(grammarAccess.getChordParamsAccess().getAlternatives_1_1(), "rule__ChordParams__Alternatives_1_1");
+					put(grammarAccess.getNoteLetterAccess().getAlternatives(), "rule__NoteLetter__Alternatives");
+					put(grammarAccess.getAccidentAccess().getAlternatives(), "rule__Accident__Alternatives");
+					put(grammarAccess.getInstrumentAccess().getAlternatives(), "rule__Instrument__Alternatives");
+					put(grammarAccess.getCustomNoteParamAccess().getAlternatives(), "rule__CustomNoteParam__Alternatives");
+					put(grammarAccess.getMidiAccess().getGroup(), "rule__Midi__Group__0");
+					put(grammarAccess.getMidiBodyAccess().getGroup(), "rule__MidiBody__Group__0");
+					put(grammarAccess.getParameterAccess().getGroup_0(), "rule__Parameter__Group_0__0");
+					put(grammarAccess.getParameterAccess().getGroup_0_1(), "rule__Parameter__Group_0_1__0");
+					put(grammarAccess.getParameterAccess().getGroup_1(), "rule__Parameter__Group_1__0");
+					put(grammarAccess.getParameterAccess().getGroup_1_0(), "rule__Parameter__Group_1_0__0");
+					put(grammarAccess.getParameterAccess().getGroup_2(), "rule__Parameter__Group_2__0");
+					put(grammarAccess.getParameterAccess().getGroup_2_0(), "rule__Parameter__Group_2_0__0");
+					put(grammarAccess.getParameterAccess().getGroup_3(), "rule__Parameter__Group_3__0");
+					put(grammarAccess.getParameterAccess().getGroup_3_0(), "rule__Parameter__Group_3_0__0");
+					put(grammarAccess.getParameterAccess().getGroup_4(), "rule__Parameter__Group_4__0");
+					put(grammarAccess.getParameterAccess().getGroup_4_0(), "rule__Parameter__Group_4_0__0");
+					put(grammarAccess.getTrackAccess().getGroup(), "rule__Track__Group__0");
+					put(grammarAccess.getTrackBodyAccess().getGroup(), "rule__TrackBody__Group__0");
+					put(grammarAccess.getMoreTrackBodyAccess().getGroup(), "rule__MoreTrackBody__Group__0");
+					put(grammarAccess.getMoreTrackBodyAccess().getGroup_1(), "rule__MoreTrackBody__Group_1__0");
+					put(grammarAccess.getBlockAccess().getGroup(), "rule__Block__Group__0");
+					put(grammarAccess.getTimeSignatureAccess().getGroup(), "rule__TimeSignature__Group__0");
+					put(grammarAccess.getCustomNoteAccess().getGroup(), "rule__CustomNote__Group__0");
+					put(grammarAccess.getChordAccess().getGroup(), "rule__Chord__Group__0");
+					put(grammarAccess.getChordParamsAccess().getGroup(), "rule__ChordParams__Group__0");
+					put(grammarAccess.getChordParamsAccess().getGroup_1(), "rule__ChordParams__Group_1__0");
+					put(grammarAccess.getNoteAccess().getGroup(), "rule__Note__Group__0");
+					put(grammarAccess.getCustomNoteParamAccess().getGroup_0(), "rule__CustomNoteParam__Group_0__0");
+					put(grammarAccess.getCustomNoteParamAccess().getGroup_1(), "rule__CustomNoteParam__Group_1__0");
+					put(grammarAccess.getMidiAccess().getNameAssignment_1(), "rule__Midi__NameAssignment_1");
+					put(grammarAccess.getMidiAccess().getBodyAssignment_3(), "rule__Midi__BodyAssignment_3");
+					put(grammarAccess.getMidiBodyAccess().getParamAssignment_1(), "rule__MidiBody__ParamAssignment_1");
+					put(grammarAccess.getMidiBodyAccess().getTracksAssignment_2(), "rule__MidiBody__TracksAssignment_2");
+					put(grammarAccess.getParameterAccess().getBeatAssignment_0_1_2(), "rule__Parameter__BeatAssignment_0_1_2");
+					put(grammarAccess.getParameterAccess().getTypeAssignment_0_2(), "rule__Parameter__TypeAssignment_0_2");
+					put(grammarAccess.getParameterAccess().getTsigAssignment_1_0_2(), "rule__Parameter__TsigAssignment_1_0_2");
+					put(grammarAccess.getParameterAccess().getTypeAssignment_1_1(), "rule__Parameter__TypeAssignment_1_1");
+					put(grammarAccess.getParameterAccess().getTnAssignment_2_0_2(), "rule__Parameter__TnAssignment_2_0_2");
+					put(grammarAccess.getParameterAccess().getTypeAssignment_2_1(), "rule__Parameter__TypeAssignment_2_1");
+					put(grammarAccess.getParameterAccess().getTpAssignment_3_0_2(), "rule__Parameter__TpAssignment_3_0_2");
+					put(grammarAccess.getParameterAccess().getTypeAssignment_3_1(), "rule__Parameter__TypeAssignment_3_1");
+					put(grammarAccess.getParameterAccess().getOctaveAssignment_4_0_2(), "rule__Parameter__OctaveAssignment_4_0_2");
+					put(grammarAccess.getParameterAccess().getTypeAssignment_4_1(), "rule__Parameter__TypeAssignment_4_1");
+					put(grammarAccess.getTrackAccess().getNameAssignment_1(), "rule__Track__NameAssignment_1");
+					put(grammarAccess.getTrackAccess().getTbodyAssignment_5(), "rule__Track__TbodyAssignment_5");
+					put(grammarAccess.getTrackBodyAccess().getBodyAssignment_0(), "rule__TrackBody__BodyAssignment_0");
+					put(grammarAccess.getTrackBodyAccess().getMoreAssignment_1(), "rule__TrackBody__MoreAssignment_1");
+					put(grammarAccess.getMoreTrackBodyAccess().getMorebodyAssignment_1_1(), "rule__MoreTrackBody__MorebodyAssignment_1_1");
+					put(grammarAccess.getBodyComponentAccess().getCnoteAssignment_0(), "rule__BodyComponent__CnoteAssignment_0");
+					put(grammarAccess.getBodyComponentAccess().getNoteAssignment_1(), "rule__BodyComponent__NoteAssignment_1");
+					put(grammarAccess.getBodyComponentAccess().getBlockAssignment_2(), "rule__BodyComponent__BlockAssignment_2");
+					put(grammarAccess.getBodyComponentAccess().getChordAssignment_3(), "rule__BodyComponent__ChordAssignment_3");
+					put(grammarAccess.getBlockAccess().getNameAssignment_1(), "rule__Block__NameAssignment_1");
+					put(grammarAccess.getBlockAccess().getBlockbodyAssignment_3(), "rule__Block__BlockbodyAssignment_3");
+					put(grammarAccess.getTimeSignatureAccess().getQuantityAssignment_0(), "rule__TimeSignature__QuantityAssignment_0");
+					put(grammarAccess.getTimeSignatureAccess().getNoteAssignment_2(), "rule__TimeSignature__NoteAssignment_2");
+					put(grammarAccess.getChordAccess().getNameAssignment_4(), "rule__Chord__NameAssignment_4");
+					put(grammarAccess.getChordParamsAccess().getCnotesAssignment_1_1_1(), "rule__ChordParams__CnotesAssignment_1_1_1");
+					put(grammarAccess.getCustomNoteParamAccess().getOctaveAssignment_0_0(), "rule__CustomNoteParam__OctaveAssignment_0_0");
 				}
 			};
 		}
@@ -50,7 +111,7 @@ public class MusyParser extends AbstractContentAssistParser {
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
 			ufscar.compiladores2.ui.contentassist.antlr.internal.InternalMusyParser typedParser = (ufscar.compiladores2.ui.contentassist.antlr.internal.InternalMusyParser) parser;
-			typedParser.entryRuleModel();
+			typedParser.entryRuleMidi();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);

@@ -18,39 +18,26 @@ import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 public class MusyGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
-		private final Assignment cGreetingsAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cGreetingsGreetingParserRuleCall_0 = (RuleCall)cGreetingsAssignment.eContents().get(0);
-		
-		//Model:
-		//	greetings+=Greeting*;
-		@Override public ParserRule getRule() { return rule; }
-
-		//greetings+=Greeting*
-		public Assignment getGreetingsAssignment() { return cGreetingsAssignment; }
-
-		//Greeting
-		public RuleCall getGreetingsGreetingParserRuleCall_0() { return cGreetingsGreetingParserRuleCall_0; }
-	}
-
-	public class GreetingElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Greeting");
+	public class MidiElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Midi");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cHelloKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cMIDIKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cExclamationMarkKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cBodyAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cBodyMidiBodyParserRuleCall_3_0 = (RuleCall)cBodyAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//Greeting:
-		//	"Hello" name=ID "!";
+		//Midi:
+		//	"MIDI" name=ID "{" body=MidiBody "}";
 		@Override public ParserRule getRule() { return rule; }
 
-		//"Hello" name=ID "!"
+		//"MIDI" name=ID "{" body=MidiBody "}"
 		public Group getGroup() { return cGroup; }
 
-		//"Hello"
-		public Keyword getHelloKeyword_0() { return cHelloKeyword_0; }
+		//"MIDI"
+		public Keyword getMIDIKeyword_0() { return cMIDIKeyword_0; }
 
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
@@ -58,13 +45,813 @@ public class MusyGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//"!"
-		public Keyword getExclamationMarkKeyword_2() { return cExclamationMarkKeyword_2; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+
+		//body=MidiBody
+		public Assignment getBodyAssignment_3() { return cBodyAssignment_3; }
+
+		//MidiBody
+		public RuleCall getBodyMidiBodyParserRuleCall_3_0() { return cBodyMidiBodyParserRuleCall_3_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
+
+	public class MidiBodyElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MidiBody");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cMidiBodyAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cParamAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cParamParameterParserRuleCall_1_0 = (RuleCall)cParamAssignment_1.eContents().get(0);
+		private final Assignment cTracksAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTracksTrackParserRuleCall_2_0 = (RuleCall)cTracksAssignment_2.eContents().get(0);
+		
+		//MidiBody:
+		//	{MidiBody} param+=Parameter* tracks+=Track*;
+		@Override public ParserRule getRule() { return rule; }
+
+		//{MidiBody} param+=Parameter* tracks+=Track*
+		public Group getGroup() { return cGroup; }
+
+		//{MidiBody}
+		public Action getMidiBodyAction_0() { return cMidiBodyAction_0; }
+
+		//param+=Parameter*
+		public Assignment getParamAssignment_1() { return cParamAssignment_1; }
+
+		//Parameter
+		public RuleCall getParamParameterParserRuleCall_1_0() { return cParamParameterParserRuleCall_1_0; }
+
+		//tracks+=Track*
+		public Assignment getTracksAssignment_2() { return cTracksAssignment_2; }
+
+		//Track
+		public RuleCall getTracksTrackParserRuleCall_2_0() { return cTracksTrackParserRuleCall_2_0; }
+	}
+
+	public class ParameterElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parameter");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Action cParameterAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
+		private final Keyword cBPMKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
+		private final Keyword cColonKeyword_0_1_1 = (Keyword)cGroup_0_1.eContents().get(1);
+		private final Assignment cBeatAssignment_0_1_2 = (Assignment)cGroup_0_1.eContents().get(2);
+		private final RuleCall cBeatINTTerminalRuleCall_0_1_2_0 = (RuleCall)cBeatAssignment_0_1_2.eContents().get(0);
+		private final Assignment cTypeAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
+		private final Keyword cTypeBpmKeyword_0_2_0 = (Keyword)cTypeAssignment_0_2.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cGroup_1.eContents().get(0);
+		private final Keyword cTIME_SIGNATUREKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final Keyword cColonKeyword_1_0_1 = (Keyword)cGroup_1_0.eContents().get(1);
+		private final Assignment cTsigAssignment_1_0_2 = (Assignment)cGroup_1_0.eContents().get(2);
+		private final RuleCall cTsigTimeSignatureParserRuleCall_1_0_2_0 = (RuleCall)cTsigAssignment_1_0_2.eContents().get(0);
+		private final Assignment cTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final Keyword cTypeTime_sigKeyword_1_1_0 = (Keyword)cTypeAssignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
+		private final Group cGroup_2_0 = (Group)cGroup_2.eContents().get(0);
+		private final Keyword cTIME_NOTEKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
+		private final Keyword cColonKeyword_2_0_1 = (Keyword)cGroup_2_0.eContents().get(1);
+		private final Assignment cTnAssignment_2_0_2 = (Assignment)cGroup_2_0.eContents().get(2);
+		private final RuleCall cTnTnParserRuleCall_2_0_2_0 = (RuleCall)cTnAssignment_2_0_2.eContents().get(0);
+		private final Assignment cTypeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final Keyword cTypeTime_noteKeyword_2_1_0 = (Keyword)cTypeAssignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
+		private final Group cGroup_3_0 = (Group)cGroup_3.eContents().get(0);
+		private final Keyword cTIME_PAUSEKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
+		private final Keyword cColonKeyword_3_0_1 = (Keyword)cGroup_3_0.eContents().get(1);
+		private final Assignment cTpAssignment_3_0_2 = (Assignment)cGroup_3_0.eContents().get(2);
+		private final RuleCall cTpTpParserRuleCall_3_0_2_0 = (RuleCall)cTpAssignment_3_0_2.eContents().get(0);
+		private final Assignment cTypeAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final Keyword cTypeTime_pauseKeyword_3_1_0 = (Keyword)cTypeAssignment_3_1.eContents().get(0);
+		private final Group cGroup_4 = (Group)cAlternatives.eContents().get(4);
+		private final Group cGroup_4_0 = (Group)cGroup_4.eContents().get(0);
+		private final Keyword cOCTAVEKeyword_4_0_0 = (Keyword)cGroup_4_0.eContents().get(0);
+		private final Keyword cColonKeyword_4_0_1 = (Keyword)cGroup_4_0.eContents().get(1);
+		private final Assignment cOctaveAssignment_4_0_2 = (Assignment)cGroup_4_0.eContents().get(2);
+		private final RuleCall cOctaveINTTerminalRuleCall_4_0_2_0 = (RuleCall)cOctaveAssignment_4_0_2.eContents().get(0);
+		private final Assignment cTypeAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final Keyword cTypeOctaveKeyword_4_1_0 = (Keyword)cTypeAssignment_4_1.eContents().get(0);
+		
+		//Parameter:
+		//	{Parameter} ("BPM" ":" beat=INT) type="bpm" | ("TIME_SIGNATURE" ":" tsig=TimeSignature) type="time_sig" | ("TIME_NOTE"
+		//	":" tn=Tn) type="time_note" | ("TIME_PAUSE" ":" tp=Tp) type="time_pause" | ("OCTAVE" ":" octave=INT) type="octave";
+		@Override public ParserRule getRule() { return rule; }
+
+		//{Parameter} ("BPM" ":" beat=INT) type="bpm" | ("TIME_SIGNATURE" ":" tsig=TimeSignature) type="time_sig" | ("TIME_NOTE"
+		//":" tn=Tn) type="time_note" | ("TIME_PAUSE" ":" tp=Tp) type="time_pause" | ("OCTAVE" ":" octave=INT) type="octave"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//{Parameter} ("BPM" ":" beat=INT) type="bpm"
+		public Group getGroup_0() { return cGroup_0; }
+
+		//{Parameter}
+		public Action getParameterAction_0_0() { return cParameterAction_0_0; }
+
+		//"BPM" ":" beat=INT
+		public Group getGroup_0_1() { return cGroup_0_1; }
+
+		//"BPM"
+		public Keyword getBPMKeyword_0_1_0() { return cBPMKeyword_0_1_0; }
+
+		//":"
+		public Keyword getColonKeyword_0_1_1() { return cColonKeyword_0_1_1; }
+
+		//beat=INT
+		public Assignment getBeatAssignment_0_1_2() { return cBeatAssignment_0_1_2; }
+
+		//INT
+		public RuleCall getBeatINTTerminalRuleCall_0_1_2_0() { return cBeatINTTerminalRuleCall_0_1_2_0; }
+
+		//type="bpm"
+		public Assignment getTypeAssignment_0_2() { return cTypeAssignment_0_2; }
+
+		//"bpm"
+		public Keyword getTypeBpmKeyword_0_2_0() { return cTypeBpmKeyword_0_2_0; }
+
+		//("TIME_SIGNATURE" ":" tsig=TimeSignature) type="time_sig"
+		public Group getGroup_1() { return cGroup_1; }
+
+		//"TIME_SIGNATURE" ":" tsig=TimeSignature
+		public Group getGroup_1_0() { return cGroup_1_0; }
+
+		//"TIME_SIGNATURE"
+		public Keyword getTIME_SIGNATUREKeyword_1_0_0() { return cTIME_SIGNATUREKeyword_1_0_0; }
+
+		//":"
+		public Keyword getColonKeyword_1_0_1() { return cColonKeyword_1_0_1; }
+
+		//tsig=TimeSignature
+		public Assignment getTsigAssignment_1_0_2() { return cTsigAssignment_1_0_2; }
+
+		//TimeSignature
+		public RuleCall getTsigTimeSignatureParserRuleCall_1_0_2_0() { return cTsigTimeSignatureParserRuleCall_1_0_2_0; }
+
+		//type="time_sig"
+		public Assignment getTypeAssignment_1_1() { return cTypeAssignment_1_1; }
+
+		//"time_sig"
+		public Keyword getTypeTime_sigKeyword_1_1_0() { return cTypeTime_sigKeyword_1_1_0; }
+
+		//("TIME_NOTE" ":" tn=Tn) type="time_note"
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"TIME_NOTE" ":" tn=Tn
+		public Group getGroup_2_0() { return cGroup_2_0; }
+
+		//"TIME_NOTE"
+		public Keyword getTIME_NOTEKeyword_2_0_0() { return cTIME_NOTEKeyword_2_0_0; }
+
+		//":"
+		public Keyword getColonKeyword_2_0_1() { return cColonKeyword_2_0_1; }
+
+		//tn=Tn
+		public Assignment getTnAssignment_2_0_2() { return cTnAssignment_2_0_2; }
+
+		//Tn
+		public RuleCall getTnTnParserRuleCall_2_0_2_0() { return cTnTnParserRuleCall_2_0_2_0; }
+
+		//type="time_note"
+		public Assignment getTypeAssignment_2_1() { return cTypeAssignment_2_1; }
+
+		//"time_note"
+		public Keyword getTypeTime_noteKeyword_2_1_0() { return cTypeTime_noteKeyword_2_1_0; }
+
+		//("TIME_PAUSE" ":" tp=Tp) type="time_pause"
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"TIME_PAUSE" ":" tp=Tp
+		public Group getGroup_3_0() { return cGroup_3_0; }
+
+		//"TIME_PAUSE"
+		public Keyword getTIME_PAUSEKeyword_3_0_0() { return cTIME_PAUSEKeyword_3_0_0; }
+
+		//":"
+		public Keyword getColonKeyword_3_0_1() { return cColonKeyword_3_0_1; }
+
+		//tp=Tp
+		public Assignment getTpAssignment_3_0_2() { return cTpAssignment_3_0_2; }
+
+		//Tp
+		public RuleCall getTpTpParserRuleCall_3_0_2_0() { return cTpTpParserRuleCall_3_0_2_0; }
+
+		//type="time_pause"
+		public Assignment getTypeAssignment_3_1() { return cTypeAssignment_3_1; }
+
+		//"time_pause"
+		public Keyword getTypeTime_pauseKeyword_3_1_0() { return cTypeTime_pauseKeyword_3_1_0; }
+
+		//("OCTAVE" ":" octave=INT) type="octave"
+		public Group getGroup_4() { return cGroup_4; }
+
+		//"OCTAVE" ":" octave=INT
+		public Group getGroup_4_0() { return cGroup_4_0; }
+
+		//"OCTAVE"
+		public Keyword getOCTAVEKeyword_4_0_0() { return cOCTAVEKeyword_4_0_0; }
+
+		//":"
+		public Keyword getColonKeyword_4_0_1() { return cColonKeyword_4_0_1; }
+
+		//octave=INT
+		public Assignment getOctaveAssignment_4_0_2() { return cOctaveAssignment_4_0_2; }
+
+		//INT
+		public RuleCall getOctaveINTTerminalRuleCall_4_0_2_0() { return cOctaveINTTerminalRuleCall_4_0_2_0; }
+
+		//type="octave"
+		public Assignment getTypeAssignment_4_1() { return cTypeAssignment_4_1; }
+
+		//"octave"
+		public Keyword getTypeOctaveKeyword_4_1_0() { return cTypeOctaveKeyword_4_1_0; }
+	}
+
+	public class TrackElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Track");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cTRACKKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final RuleCall cInstrumentParserRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cTbodyAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cTbodyTrackBodyParserRuleCall_5_0 = (RuleCall)cTbodyAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		
+		//Track:
+		//	"TRACK" name=ID ":" Instrument "{" tbody=TrackBody "}";
+		@Override public ParserRule getRule() { return rule; }
+
+		//"TRACK" name=ID ":" Instrument "{" tbody=TrackBody "}"
+		public Group getGroup() { return cGroup; }
+
+		//"TRACK"
+		public Keyword getTRACKKeyword_0() { return cTRACKKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//":"
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+
+		//Instrument
+		public RuleCall getInstrumentParserRuleCall_3() { return cInstrumentParserRuleCall_3; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
+
+		//tbody=TrackBody
+		public Assignment getTbodyAssignment_5() { return cTbodyAssignment_5; }
+
+		//TrackBody
+		public RuleCall getTbodyTrackBodyParserRuleCall_5_0() { return cTbodyTrackBodyParserRuleCall_5_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+	}
+
+	public class TrackBodyElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrackBody");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cBodyAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cBodyBodyComponentParserRuleCall_0_0 = (RuleCall)cBodyAssignment_0.eContents().get(0);
+		private final Assignment cMoreAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cMoreMoreTrackBodyParserRuleCall_1_0 = (RuleCall)cMoreAssignment_1.eContents().get(0);
+		
+		//TrackBody:
+		//	body=BodyComponent more=MoreTrackBody?;
+		@Override public ParserRule getRule() { return rule; }
+
+		//body=BodyComponent more=MoreTrackBody?
+		public Group getGroup() { return cGroup; }
+
+		//body=BodyComponent
+		public Assignment getBodyAssignment_0() { return cBodyAssignment_0; }
+
+		//BodyComponent
+		public RuleCall getBodyBodyComponentParserRuleCall_0_0() { return cBodyBodyComponentParserRuleCall_0_0; }
+
+		//more=MoreTrackBody?
+		public Assignment getMoreAssignment_1() { return cMoreAssignment_1; }
+
+		//MoreTrackBody
+		public RuleCall getMoreMoreTrackBodyParserRuleCall_1_0() { return cMoreMoreTrackBodyParserRuleCall_1_0; }
+	}
+
+	public class MoreTrackBodyElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MoreTrackBody");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cMoreTrackBodyAction_0 = (Action)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cMorebodyAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cMorebodyBodyComponentParserRuleCall_1_1_0 = (RuleCall)cMorebodyAssignment_1_1.eContents().get(0);
+		
+		//MoreTrackBody:
+		//	{MoreTrackBody} ("," morebody+=BodyComponent)+;
+		@Override public ParserRule getRule() { return rule; }
+
+		//{MoreTrackBody} ("," morebody+=BodyComponent)+
+		public Group getGroup() { return cGroup; }
+
+		//{MoreTrackBody}
+		public Action getMoreTrackBodyAction_0() { return cMoreTrackBodyAction_0; }
+
+		//("," morebody+=BodyComponent)+
+		public Group getGroup_1() { return cGroup_1; }
+
+		//","
+		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
+
+		//morebody+=BodyComponent
+		public Assignment getMorebodyAssignment_1_1() { return cMorebodyAssignment_1_1; }
+
+		//BodyComponent
+		public RuleCall getMorebodyBodyComponentParserRuleCall_1_1_0() { return cMorebodyBodyComponentParserRuleCall_1_1_0; }
+	}
+
+	public class BodyComponentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BodyComponent");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Assignment cCnoteAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall cCnoteCustomNoteParserRuleCall_0_0 = (RuleCall)cCnoteAssignment_0.eContents().get(0);
+		private final Assignment cNoteAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cNoteNoteParserRuleCall_1_0 = (RuleCall)cNoteAssignment_1.eContents().get(0);
+		private final Assignment cBlockAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
+		private final RuleCall cBlockBlockParserRuleCall_2_0 = (RuleCall)cBlockAssignment_2.eContents().get(0);
+		private final Assignment cChordAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
+		private final RuleCall cChordChordParserRuleCall_3_0 = (RuleCall)cChordAssignment_3.eContents().get(0);
+		
+		//BodyComponent:
+		//	cnote=CustomNote | note=Note | block=Block | chord=Chord;
+		@Override public ParserRule getRule() { return rule; }
+
+		//cnote=CustomNote | note=Note | block=Block | chord=Chord
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//cnote=CustomNote
+		public Assignment getCnoteAssignment_0() { return cCnoteAssignment_0; }
+
+		//CustomNote
+		public RuleCall getCnoteCustomNoteParserRuleCall_0_0() { return cCnoteCustomNoteParserRuleCall_0_0; }
+
+		//note=Note
+		public Assignment getNoteAssignment_1() { return cNoteAssignment_1; }
+
+		//Note
+		public RuleCall getNoteNoteParserRuleCall_1_0() { return cNoteNoteParserRuleCall_1_0; }
+
+		//block=Block
+		public Assignment getBlockAssignment_2() { return cBlockAssignment_2; }
+
+		//Block
+		public RuleCall getBlockBlockParserRuleCall_2_0() { return cBlockBlockParserRuleCall_2_0; }
+
+		//chord=Chord
+		public Assignment getChordAssignment_3() { return cChordAssignment_3; }
+
+		//Chord
+		public RuleCall getChordChordParserRuleCall_3_0() { return cChordChordParserRuleCall_3_0; }
+	}
+
+	public class BlockElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Block");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cBLOCKKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cBlockbodyAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cBlockbodyTrackBodyParserRuleCall_3_0 = (RuleCall)cBlockbodyAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//Block:
+		//	"BLOCK" name=ID "{" blockbody+=TrackBody* "}";
+		@Override public ParserRule getRule() { return rule; }
+
+		//"BLOCK" name=ID "{" blockbody+=TrackBody* "}"
+		public Group getGroup() { return cGroup; }
+
+		//"BLOCK"
+		public Keyword getBLOCKKeyword_0() { return cBLOCKKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+
+		//blockbody+=TrackBody*
+		public Assignment getBlockbodyAssignment_3() { return cBlockbodyAssignment_3; }
+
+		//TrackBody
+		public RuleCall getBlockbodyTrackBodyParserRuleCall_3_0() { return cBlockbodyTrackBodyParserRuleCall_3_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
+
+	public class TimeSignatureElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TimeSignature");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cQuantityAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cQuantityINTTerminalRuleCall_0_0 = (RuleCall)cQuantityAssignment_0.eContents().get(0);
+		private final Keyword cSolidusKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNoteAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNoteINTTerminalRuleCall_2_0 = (RuleCall)cNoteAssignment_2.eContents().get(0);
+		
+		//TimeSignature:
+		//	quantity=INT "/" note=INT;
+		@Override public ParserRule getRule() { return rule; }
+
+		//quantity=INT "/" note=INT
+		public Group getGroup() { return cGroup; }
+
+		//quantity=INT
+		public Assignment getQuantityAssignment_0() { return cQuantityAssignment_0; }
+
+		//INT
+		public RuleCall getQuantityINTTerminalRuleCall_0_0() { return cQuantityINTTerminalRuleCall_0_0; }
+
+		//"/"
+		public Keyword getSolidusKeyword_1() { return cSolidusKeyword_1; }
+
+		//note=INT
+		public Assignment getNoteAssignment_2() { return cNoteAssignment_2; }
+
+		//INT
+		public RuleCall getNoteINTTerminalRuleCall_2_0() { return cNoteINTTerminalRuleCall_2_0; }
+	}
+
+	public class TpElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Tp");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cSbKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cMKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cSmKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cClKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cScKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cFKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
+		private final Keyword cSfKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
+		
+		//Tp:
+		//	"sb" | "m" | "sm" | "cl" | "sc" | "f" | "sf";
+		@Override public ParserRule getRule() { return rule; }
+
+		//"sb" | "m" | "sm" | "cl" | "sc" | "f" | "sf"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//"sb"
+		public Keyword getSbKeyword_0() { return cSbKeyword_0; }
+
+		//"m"
+		public Keyword getMKeyword_1() { return cMKeyword_1; }
+
+		//"sm"
+		public Keyword getSmKeyword_2() { return cSmKeyword_2; }
+
+		//"cl"
+		public Keyword getClKeyword_3() { return cClKeyword_3; }
+
+		//"sc"
+		public Keyword getScKeyword_4() { return cScKeyword_4; }
+
+		//"f"
+		public Keyword getFKeyword_5() { return cFKeyword_5; }
+
+		//"sf"
+		public Keyword getSfKeyword_6() { return cSfKeyword_6; }
+	}
+
+	public class TnElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Tn");
+		private final RuleCall cTpParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//Tn:
+		//	Tp;
+		@Override public ParserRule getRule() { return rule; }
+
+		//Tp
+		public RuleCall getTpParserRuleCall() { return cTpParserRuleCall; }
+	}
+
+	public class CustomNoteElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CustomNote");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cNoteParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall cCustomNoteParamParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//CustomNote:
+		//	Note "(" CustomNoteParam ")";
+		@Override public ParserRule getRule() { return rule; }
+
+		//Note "(" CustomNoteParam ")"
+		public Group getGroup() { return cGroup; }
+
+		//Note
+		public RuleCall getNoteParserRuleCall_0() { return cNoteParserRuleCall_0; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+
+		//CustomNoteParam
+		public RuleCall getCustomNoteParamParserRuleCall_2() { return cCustomNoteParamParserRuleCall_2; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+	}
+
+	public class ChordElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Chord");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cChordKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall cChordParamsParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cNameAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cNameIDTerminalRuleCall_4_0 = (RuleCall)cNameAssignment_4.eContents().get(0);
+		
+		//Chord:
+		//	"chord" "(" ChordParams ")" name=ID;
+		@Override public ParserRule getRule() { return rule; }
+
+		//"chord" "(" ChordParams ")" name=ID
+		public Group getGroup() { return cGroup; }
+
+		//"chord"
+		public Keyword getChordKeyword_0() { return cChordKeyword_0; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+
+		//ChordParams
+		public RuleCall getChordParamsParserRuleCall_2() { return cChordParamsParserRuleCall_2; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+
+		//name=ID
+		public Assignment getNameAssignment_4() { return cNameAssignment_4; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_4_0() { return cNameIDTerminalRuleCall_4_0; }
+	}
+
+	public class ChordParamsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ChordParams");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final RuleCall cNoteParserRuleCall_0_0 = (RuleCall)cAlternatives_0.eContents().get(0);
+		private final RuleCall cCustomNoteParserRuleCall_0_1 = (RuleCall)cAlternatives_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
+		private final RuleCall cNoteParserRuleCall_1_1_0 = (RuleCall)cAlternatives_1_1.eContents().get(0);
+		private final Assignment cCnotesAssignment_1_1_1 = (Assignment)cAlternatives_1_1.eContents().get(1);
+		private final RuleCall cCnotesCustomNoteParserRuleCall_1_1_1_0 = (RuleCall)cCnotesAssignment_1_1_1.eContents().get(0);
+		
+		//ChordParams:
+		//	(Note | CustomNote) ("," (Note | cnotes+=CustomNote))*;
+		@Override public ParserRule getRule() { return rule; }
+
+		//(Note | CustomNote) ("," (Note | cnotes+=CustomNote))*
+		public Group getGroup() { return cGroup; }
+
+		//Note | CustomNote
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
+		//Note
+		public RuleCall getNoteParserRuleCall_0_0() { return cNoteParserRuleCall_0_0; }
+
+		//CustomNote
+		public RuleCall getCustomNoteParserRuleCall_0_1() { return cCustomNoteParserRuleCall_0_1; }
+
+		//("," (Note | cnotes+=CustomNote))*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//","
+		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
+
+		//Note | cnotes+=CustomNote
+		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
+
+		//Note
+		public RuleCall getNoteParserRuleCall_1_1_0() { return cNoteParserRuleCall_1_1_0; }
+
+		//cnotes+=CustomNote
+		public Assignment getCnotesAssignment_1_1_1() { return cCnotesAssignment_1_1_1; }
+
+		//CustomNote
+		public RuleCall getCnotesCustomNoteParserRuleCall_1_1_1_0() { return cCnotesCustomNoteParserRuleCall_1_1_1_0; }
+	}
+
+	public class NoteLetterElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NoteLetter");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cCKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cDKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cEKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cFKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cGKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cAKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
+		private final Keyword cBKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
+		
+		//NoteLetter:
+		//	"C" | "D" | "E" | "F" | "G" | "A" | "B";
+		@Override public ParserRule getRule() { return rule; }
+
+		//"C" | "D" | "E" | "F" | "G" | "A" | "B"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//"C"
+		public Keyword getCKeyword_0() { return cCKeyword_0; }
+
+		//"D"
+		public Keyword getDKeyword_1() { return cDKeyword_1; }
+
+		//"E"
+		public Keyword getEKeyword_2() { return cEKeyword_2; }
+
+		//"F"
+		public Keyword getFKeyword_3() { return cFKeyword_3; }
+
+		//"G"
+		public Keyword getGKeyword_4() { return cGKeyword_4; }
+
+		//"A"
+		public Keyword getAKeyword_5() { return cAKeyword_5; }
+
+		//"B"
+		public Keyword getBKeyword_6() { return cBKeyword_6; }
+	}
+
+	public class AccidentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Accident");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cNumberSignKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cBKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		
+		//Accident:
+		//	"#" | "b";
+		@Override public ParserRule getRule() { return rule; }
+
+		//"#" | "b"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//"#"
+		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
+
+		//"b"
+		public Keyword getBKeyword_1() { return cBKeyword_1; }
+	}
+
+	public class NoteElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Note");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cNoteLetterParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall cAccidentParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//Note:
+		//	NoteLetter Accident?;
+		@Override public ParserRule getRule() { return rule; }
+
+		//NoteLetter Accident?
+		public Group getGroup() { return cGroup; }
+
+		//NoteLetter
+		public RuleCall getNoteLetterParserRuleCall_0() { return cNoteLetterParserRuleCall_0; }
+
+		//Accident?
+		public RuleCall getAccidentParserRuleCall_1() { return cAccidentParserRuleCall_1; }
+	}
+
+	public class InstrumentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Instrument");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cPIANOKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cGUITARKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cELETRICGUITARKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cBASSKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cSAXKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cVIOLINKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
+		private final Keyword cDRUMSKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
+		
+		//Instrument:
+		//	"PIANO" | "GUITAR" | "ELETRIC GUITAR" | "BASS" | "SAX" | "VIOLIN" | "DRUMS";
+		@Override public ParserRule getRule() { return rule; }
+
+		//"PIANO" | "GUITAR" | "ELETRIC GUITAR" | "BASS" | "SAX" | "VIOLIN" | "DRUMS"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//"PIANO"
+		public Keyword getPIANOKeyword_0() { return cPIANOKeyword_0; }
+
+		//"GUITAR"
+		public Keyword getGUITARKeyword_1() { return cGUITARKeyword_1; }
+
+		//"ELETRIC GUITAR"
+		public Keyword getELETRICGUITARKeyword_2() { return cELETRICGUITARKeyword_2; }
+
+		//"BASS"
+		public Keyword getBASSKeyword_3() { return cBASSKeyword_3; }
+
+		//"SAX"
+		public Keyword getSAXKeyword_4() { return cSAXKeyword_4; }
+
+		//"VIOLIN"
+		public Keyword getVIOLINKeyword_5() { return cVIOLINKeyword_5; }
+
+		//"DRUMS"
+		public Keyword getDRUMSKeyword_6() { return cDRUMSKeyword_6; }
+	}
+
+	public class CustomNoteParamElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CustomNoteParam");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Assignment cOctaveAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final RuleCall cOctaveINTTerminalRuleCall_0_0_0 = (RuleCall)cOctaveAssignment_0_0.eContents().get(0);
+		private final Keyword cCommaKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final RuleCall cTnParserRuleCall_0_2 = (RuleCall)cGroup_0.eContents().get(2);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final RuleCall cTnParserRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
+		private final Keyword cCommaKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_1_2 = (RuleCall)cGroup_1.eContents().get(2);
+		private final RuleCall cINTTerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cTnParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		
+		//CustomNoteParam:
+		//	octave=INT "," Tn | Tn "," INT | INT | Tn;
+		@Override public ParserRule getRule() { return rule; }
+
+		//octave=INT "," Tn | Tn "," INT | INT | Tn
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//octave=INT "," Tn
+		public Group getGroup_0() { return cGroup_0; }
+
+		//octave=INT
+		public Assignment getOctaveAssignment_0_0() { return cOctaveAssignment_0_0; }
+
+		//INT
+		public RuleCall getOctaveINTTerminalRuleCall_0_0_0() { return cOctaveINTTerminalRuleCall_0_0_0; }
+
+		//","
+		public Keyword getCommaKeyword_0_1() { return cCommaKeyword_0_1; }
+
+		//Tn
+		public RuleCall getTnParserRuleCall_0_2() { return cTnParserRuleCall_0_2; }
+
+		//Tn "," INT
+		public Group getGroup_1() { return cGroup_1; }
+
+		//Tn
+		public RuleCall getTnParserRuleCall_1_0() { return cTnParserRuleCall_1_0; }
+
+		//","
+		public Keyword getCommaKeyword_1_1() { return cCommaKeyword_1_1; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_1_2() { return cINTTerminalRuleCall_1_2; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_2() { return cINTTerminalRuleCall_2; }
+
+		//Tn
+		public RuleCall getTnParserRuleCall_3() { return cTnParserRuleCall_3; }
 	}
 	
 	
-	private final ModelElements pModel;
-	private final GreetingElements pGreeting;
+	private final MidiElements pMidi;
+	private final MidiBodyElements pMidiBody;
+	private final ParameterElements pParameter;
+	private final TrackElements pTrack;
+	private final TrackBodyElements pTrackBody;
+	private final MoreTrackBodyElements pMoreTrackBody;
+	private final BodyComponentElements pBodyComponent;
+	private final BlockElements pBlock;
+	private final TimeSignatureElements pTimeSignature;
+	private final TpElements pTp;
+	private final TnElements pTn;
+	private final CustomNoteElements pCustomNote;
+	private final ChordElements pChord;
+	private final ChordParamsElements pChordParams;
+	private final NoteLetterElements pNoteLetter;
+	private final AccidentElements pAccident;
+	private final NoteElements pNote;
+	private final InstrumentElements pInstrument;
+	private final CustomNoteParamElements pCustomNoteParam;
 	
 	private final Grammar grammar;
 
@@ -75,8 +862,25 @@ public class MusyGrammarAccess extends AbstractGrammarElementFinder {
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
-		this.pModel = new ModelElements();
-		this.pGreeting = new GreetingElements();
+		this.pMidi = new MidiElements();
+		this.pMidiBody = new MidiBodyElements();
+		this.pParameter = new ParameterElements();
+		this.pTrack = new TrackElements();
+		this.pTrackBody = new TrackBodyElements();
+		this.pMoreTrackBody = new MoreTrackBodyElements();
+		this.pBodyComponent = new BodyComponentElements();
+		this.pBlock = new BlockElements();
+		this.pTimeSignature = new TimeSignatureElements();
+		this.pTp = new TpElements();
+		this.pTn = new TnElements();
+		this.pCustomNote = new CustomNoteElements();
+		this.pChord = new ChordElements();
+		this.pChordParams = new ChordParamsElements();
+		this.pNoteLetter = new NoteLetterElements();
+		this.pAccident = new AccidentElements();
+		this.pNote = new NoteElements();
+		this.pInstrument = new InstrumentElements();
+		this.pCustomNoteParam = new CustomNoteParamElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -106,24 +910,195 @@ public class MusyGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
-	//Model:
-	//	greetings+=Greeting*;
-	public ModelElements getModelAccess() {
-		return pModel;
+	//Midi:
+	//	"MIDI" name=ID "{" body=MidiBody "}";
+	public MidiElements getMidiAccess() {
+		return pMidi;
 	}
 	
-	public ParserRule getModelRule() {
-		return getModelAccess().getRule();
+	public ParserRule getMidiRule() {
+		return getMidiAccess().getRule();
 	}
 
-	//Greeting:
-	//	"Hello" name=ID "!";
-	public GreetingElements getGreetingAccess() {
-		return pGreeting;
+	//MidiBody:
+	//	{MidiBody} param+=Parameter* tracks+=Track*;
+	public MidiBodyElements getMidiBodyAccess() {
+		return pMidiBody;
 	}
 	
-	public ParserRule getGreetingRule() {
-		return getGreetingAccess().getRule();
+	public ParserRule getMidiBodyRule() {
+		return getMidiBodyAccess().getRule();
+	}
+
+	//Parameter:
+	//	{Parameter} ("BPM" ":" beat=INT) type="bpm" | ("TIME_SIGNATURE" ":" tsig=TimeSignature) type="time_sig" | ("TIME_NOTE"
+	//	":" tn=Tn) type="time_note" | ("TIME_PAUSE" ":" tp=Tp) type="time_pause" | ("OCTAVE" ":" octave=INT) type="octave";
+	public ParameterElements getParameterAccess() {
+		return pParameter;
+	}
+	
+	public ParserRule getParameterRule() {
+		return getParameterAccess().getRule();
+	}
+
+	//Track:
+	//	"TRACK" name=ID ":" Instrument "{" tbody=TrackBody "}";
+	public TrackElements getTrackAccess() {
+		return pTrack;
+	}
+	
+	public ParserRule getTrackRule() {
+		return getTrackAccess().getRule();
+	}
+
+	//TrackBody:
+	//	body=BodyComponent more=MoreTrackBody?;
+	public TrackBodyElements getTrackBodyAccess() {
+		return pTrackBody;
+	}
+	
+	public ParserRule getTrackBodyRule() {
+		return getTrackBodyAccess().getRule();
+	}
+
+	//MoreTrackBody:
+	//	{MoreTrackBody} ("," morebody+=BodyComponent)+;
+	public MoreTrackBodyElements getMoreTrackBodyAccess() {
+		return pMoreTrackBody;
+	}
+	
+	public ParserRule getMoreTrackBodyRule() {
+		return getMoreTrackBodyAccess().getRule();
+	}
+
+	//BodyComponent:
+	//	cnote=CustomNote | note=Note | block=Block | chord=Chord;
+	public BodyComponentElements getBodyComponentAccess() {
+		return pBodyComponent;
+	}
+	
+	public ParserRule getBodyComponentRule() {
+		return getBodyComponentAccess().getRule();
+	}
+
+	//Block:
+	//	"BLOCK" name=ID "{" blockbody+=TrackBody* "}";
+	public BlockElements getBlockAccess() {
+		return pBlock;
+	}
+	
+	public ParserRule getBlockRule() {
+		return getBlockAccess().getRule();
+	}
+
+	//TimeSignature:
+	//	quantity=INT "/" note=INT;
+	public TimeSignatureElements getTimeSignatureAccess() {
+		return pTimeSignature;
+	}
+	
+	public ParserRule getTimeSignatureRule() {
+		return getTimeSignatureAccess().getRule();
+	}
+
+	//Tp:
+	//	"sb" | "m" | "sm" | "cl" | "sc" | "f" | "sf";
+	public TpElements getTpAccess() {
+		return pTp;
+	}
+	
+	public ParserRule getTpRule() {
+		return getTpAccess().getRule();
+	}
+
+	//Tn:
+	//	Tp;
+	public TnElements getTnAccess() {
+		return pTn;
+	}
+	
+	public ParserRule getTnRule() {
+		return getTnAccess().getRule();
+	}
+
+	//CustomNote:
+	//	Note "(" CustomNoteParam ")";
+	public CustomNoteElements getCustomNoteAccess() {
+		return pCustomNote;
+	}
+	
+	public ParserRule getCustomNoteRule() {
+		return getCustomNoteAccess().getRule();
+	}
+
+	//Chord:
+	//	"chord" "(" ChordParams ")" name=ID;
+	public ChordElements getChordAccess() {
+		return pChord;
+	}
+	
+	public ParserRule getChordRule() {
+		return getChordAccess().getRule();
+	}
+
+	//ChordParams:
+	//	(Note | CustomNote) ("," (Note | cnotes+=CustomNote))*;
+	public ChordParamsElements getChordParamsAccess() {
+		return pChordParams;
+	}
+	
+	public ParserRule getChordParamsRule() {
+		return getChordParamsAccess().getRule();
+	}
+
+	//NoteLetter:
+	//	"C" | "D" | "E" | "F" | "G" | "A" | "B";
+	public NoteLetterElements getNoteLetterAccess() {
+		return pNoteLetter;
+	}
+	
+	public ParserRule getNoteLetterRule() {
+		return getNoteLetterAccess().getRule();
+	}
+
+	//Accident:
+	//	"#" | "b";
+	public AccidentElements getAccidentAccess() {
+		return pAccident;
+	}
+	
+	public ParserRule getAccidentRule() {
+		return getAccidentAccess().getRule();
+	}
+
+	//Note:
+	//	NoteLetter Accident?;
+	public NoteElements getNoteAccess() {
+		return pNote;
+	}
+	
+	public ParserRule getNoteRule() {
+		return getNoteAccess().getRule();
+	}
+
+	//Instrument:
+	//	"PIANO" | "GUITAR" | "ELETRIC GUITAR" | "BASS" | "SAX" | "VIOLIN" | "DRUMS";
+	public InstrumentElements getInstrumentAccess() {
+		return pInstrument;
+	}
+	
+	public ParserRule getInstrumentRule() {
+		return getInstrumentAccess().getRule();
+	}
+
+	//CustomNoteParam:
+	//	octave=INT "," Tn | Tn "," INT | INT | Tn;
+	public CustomNoteParamElements getCustomNoteParamAccess() {
+		return pCustomNoteParam;
+	}
+	
+	public ParserRule getCustomNoteParamRule() {
+		return getCustomNoteParamAccess().getRule();
 	}
 
 	//terminal ID:

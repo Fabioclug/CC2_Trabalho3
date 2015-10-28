@@ -10,6 +10,10 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import ufscar.compiladores2.services.MusyGrammarAccess;
@@ -18,17 +22,74 @@ import ufscar.compiladores2.services.MusyGrammarAccess;
 public class MusySyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected MusyGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_ChordParams___CommaKeyword_1_0_NoteParserRuleCall_1_1_0__a;
+	protected AbstractElementAlias match_ChordParams___CommaKeyword_1_0_NoteParserRuleCall_1_1_0__p;
+	protected AbstractElementAlias match_ChordParams___NoteParserRuleCall_1_1_0_CommaKeyword_1_0__a;
+	protected AbstractElementAlias match_CustomNoteParam___INTTerminalRuleCall_2_or_TnParserRuleCall_3___or___TnParserRuleCall_1_0_CommaKeyword_1_1_INTTerminalRuleCall_1_2__;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (MusyGrammarAccess) access;
+		match_ChordParams___CommaKeyword_1_0_NoteParserRuleCall_1_1_0__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getChordParamsAccess().getCommaKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getChordParamsAccess().getNoteParserRuleCall_1_1_0()));
+		match_ChordParams___CommaKeyword_1_0_NoteParserRuleCall_1_1_0__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getChordParamsAccess().getCommaKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getChordParamsAccess().getNoteParserRuleCall_1_1_0()));
+		match_ChordParams___NoteParserRuleCall_1_1_0_CommaKeyword_1_0__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getChordParamsAccess().getNoteParserRuleCall_1_1_0()), new TokenAlias(false, false, grammarAccess.getChordParamsAccess().getCommaKeyword_1_0()));
+		match_CustomNoteParam___INTTerminalRuleCall_2_or_TnParserRuleCall_3___or___TnParserRuleCall_1_0_CommaKeyword_1_1_INTTerminalRuleCall_1_2__ = new AlternativeAlias(false, false, new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getCustomNoteParamAccess().getINTTerminalRuleCall_2()), new TokenAlias(false, false, grammarAccess.getCustomNoteParamAccess().getTnParserRuleCall_3())), new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getCustomNoteParamAccess().getTnParserRuleCall_1_0()), new TokenAlias(false, false, grammarAccess.getCustomNoteParamAccess().getCommaKeyword_1_1()), new TokenAlias(false, false, grammarAccess.getCustomNoteParamAccess().getINTTerminalRuleCall_1_2())));
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if(ruleCall.getRule() == grammarAccess.getINTRule())
+			return getINTToken(semanticObject, ruleCall, node);
+		else if(ruleCall.getRule() == grammarAccess.getInstrumentRule())
+			return getInstrumentToken(semanticObject, ruleCall, node);
+		else if(ruleCall.getRule() == grammarAccess.getNoteRule())
+			return getNoteToken(semanticObject, ruleCall, node);
+		else if(ruleCall.getRule() == grammarAccess.getTnRule())
+			return getTnToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
+	/**
+	 * terminal INT returns ecore::EInt: ('0'..'9')+;
+	 */
+	protected String getINTToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "";
+	}
+	
+	/**
+	 * Instrument:
+	 * 	'PIANO' | 'GUITAR' | 'ELETRIC GUITAR' | 'BASS' | 'SAX' | 'VIOLIN' | 'DRUMS'
+	 * ;
+	 */
+	protected String getInstrumentToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "PIANO";
+	}
+	
+	/**
+	 * Note: 
+	 * 	NoteLetter Accident?
+	 * ;
+	 */
+	protected String getNoteToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "C";
+	}
+	
+	/**
+	 * Tn:
+	 * 	Tp
+	 * ;
+	 */
+	protected String getTnToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "sb";
+	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
@@ -36,8 +97,69 @@ public class MusySyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			acceptNodes(getLastNavigableState(), syntaxNodes);
+			if(match_ChordParams___CommaKeyword_1_0_NoteParserRuleCall_1_1_0__a.equals(syntax))
+				emit_ChordParams___CommaKeyword_1_0_NoteParserRuleCall_1_1_0__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_ChordParams___CommaKeyword_1_0_NoteParserRuleCall_1_1_0__p.equals(syntax))
+				emit_ChordParams___CommaKeyword_1_0_NoteParserRuleCall_1_1_0__p(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_ChordParams___NoteParserRuleCall_1_1_0_CommaKeyword_1_0__a.equals(syntax))
+				emit_ChordParams___NoteParserRuleCall_1_1_0_CommaKeyword_1_0__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_CustomNoteParam___INTTerminalRuleCall_2_or_TnParserRuleCall_3___or___TnParserRuleCall_1_0_CommaKeyword_1_1_INTTerminalRuleCall_1_2__.equals(syntax))
+				emit_CustomNoteParam___INTTerminalRuleCall_2_or_TnParserRuleCall_3___or___TnParserRuleCall_1_0_CommaKeyword_1_1_INTTerminalRuleCall_1_2__(semanticObject, getLastNavigableState(), syntaxNodes);
+			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * Ambiguous syntax:
+	 *     (',' Note)*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) Note (ambiguity) (rule start)
+	 *     cnotes+=CustomNote (ambiguity) ')' name=ID
+	 *     cnotes+=CustomNote (ambiguity) (rule end)
+	 *     octave=INT ',' Tn ')' (ambiguity) ')' name=ID
+	 *     octave=INT ',' Tn ')' (ambiguity) (rule end)
+	 */
+	protected void emit_ChordParams___CommaKeyword_1_0_NoteParserRuleCall_1_1_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     (',' Note)+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'chord' '(' Note (ambiguity) ')' name=ID
+	 *     (rule start) Note (ambiguity) (rule start)
+	 */
+	protected void emit_ChordParams___CommaKeyword_1_0_NoteParserRuleCall_1_1_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     (Note ',')*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'chord' '(' Note ',' (ambiguity) cnotes+=CustomNote
+	 *     (rule start) Note ',' (ambiguity) cnotes+=CustomNote
+	 *     cnotes+=CustomNote ',' (ambiguity) cnotes+=CustomNote
+	 *     octave=INT ',' Tn ')' ',' (ambiguity) cnotes+=CustomNote
+	 */
+	protected void emit_ChordParams___NoteParserRuleCall_1_1_0_CommaKeyword_1_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     (Tn ',' INT) | (INT | Tn)
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) (rule start)
+	 *     (rule start) Note '(' (ambiguity) ')' (rule start)
+	 */
+	protected void emit_CustomNoteParam___INTTerminalRuleCall_2_or_TnParserRuleCall_3___or___TnParserRuleCall_1_0_CommaKeyword_1_1_INTTerminalRuleCall_1_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 }

@@ -6,6 +6,7 @@ package ufscar.compiladores2.generator
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess
+import ufscar.compiladores2.musy.Parameter
 
 /**
  * Generates code from your model files on save.
@@ -21,4 +22,10 @@ class MusyGenerator implements IGenerator {
 //				.map[name]
 //				.join(', '))
 	}
+	
+//	def compile(Parameter p) '''
+//	«IF p.beat < 1 || p.beat > 500»
+//		«p.beat = 120»
+//	«ENDIF»
+//	'''
 }

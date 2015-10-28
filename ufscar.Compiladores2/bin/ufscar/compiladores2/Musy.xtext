@@ -4,40 +4,52 @@ generate musy "http://www.compiladores2.ufscar/Musy"
 
 Midi:
 	'MIDI' name = ID '{' 
-	body = MidiBody '}'
+		body = MidiBody 
+	'}'
 ;
 
 MidiBody: 
-	param = Parameters
+	{MidiBody}
+	param += Parameter*
 	tracks += Track*
 ;
 
-Parameters:
-	('BPM' ':' beat = BPM)?
-	('TIME_SIGNATURE' tsig = TimeSignature)?
-	('TIME_NOTE' ':' tn = Tn)?
-	('TIME_PAUSE' ':' tp = Tp)?
-	('OCTAVE' ':' octave = OCTAVE)?
+Parameter:
+	{Parameter}
+	('BPM' ':' beat = INT) type = "bpm" |
+	('TIME_SIGNATURE' ':' tsig = TimeSignature) type = "time_sig" |
+	('TIME_NOTE' ':' tn = Tn) type = "time_note" |
+	('TIME_PAUSE' ':' tp = Tp) type = "time_pause" |
+	('OCTAVE' ':' octave = INT) type = "octave"
 ;
 
 Track:
-	'TRACK' name = ID '{'
+	'TRACK' name = ID ':' Instrument '{'
 		tbody = TrackBody
 	'}'
 ;
 
 TrackBody:
-	(note += NoteLetter | blocks += Block)*
+	body = BodyComponent (more = MoreTrackBody)?
+;
+
+MoreTrackBody:
+	{MoreTrackBody}
+	(',' morebody += BodyComponent)+
+;
+
+BodyComponent:
+	cnote = CustomNote | note = Note | block = Block | chord = Chord
 ;
 
 Block:
 	'BLOCK' name = ID '{'
-	
+		(blockbody += TrackBody)*
 	'}'
 ;
 
 TimeSignature:
-	SIGNATURE '/' SIGNATURE
+	quantity= INT '/' note = INT
 ;
 
 Tp:
@@ -52,6 +64,14 @@ CustomNote:
 	Note '(' CustomNoteParam ')'
 ;
 
+Chord:
+	'chord' '(' ChordParams ')' name = ID
+;
+
+ChordParams:
+	(Note | CustomNote) (',' (Note | cnotes += CustomNote))*
+;
+
 NoteLetter: 
 	'C' | 'D' | 'E' | 'F' | 'G' | 'A' | 'B'
 ;
@@ -64,12 +84,10 @@ Note:
 	NoteLetter Accident?
 ;
 
-CustomNoteParam:
-	OCTAVE ',' Tn | Tn ',' OCTAVE | OCTAVE | Tn
+Instrument:
+	'PIANO' | 'GUITAR' | 'ELETRIC GUITAR' | 'BASS' | 'SAX' | 'VIOLIN' | 'DRUMS'
 ;
 
-terminal SIGNATURE: '1'..'16';
-
-terminal OCTAVE: '1'..'8';
-
-terminal BPM: '1'..'500';
+CustomNoteParam:
+	octave = INT ',' Tn | Tn ',' INT | INT | Tn
+;

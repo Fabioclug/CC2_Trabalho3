@@ -16,41 +16,41 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import ufscar.compiladores2.musy.Greeting;
-import ufscar.compiladores2.musy.Model;
+import ufscar.compiladores2.musy.BodyComponent;
+import ufscar.compiladores2.musy.MoreTrackBody;
 import ufscar.compiladores2.musy.MusyPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model</b></em>'.
+ * An implementation of the model object '<em><b>More Track Body</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ufscar.compiladores2.musy.impl.ModelImpl#getGreetings <em>Greetings</em>}</li>
+ *   <li>{@link ufscar.compiladores2.musy.impl.MoreTrackBodyImpl#getMorebody <em>Morebody</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ModelImpl extends MinimalEObjectImpl.Container implements Model
+public class MoreTrackBodyImpl extends MinimalEObjectImpl.Container implements MoreTrackBody
 {
   /**
-   * The cached value of the '{@link #getGreetings() <em>Greetings</em>}' containment reference list.
+   * The cached value of the '{@link #getMorebody() <em>Morebody</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getGreetings()
+   * @see #getMorebody()
    * @generated
    * @ordered
    */
-  protected EList<Greeting> greetings;
+  protected EList<BodyComponent> morebody;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ModelImpl()
+  protected MoreTrackBodyImpl()
   {
     super();
   }
@@ -63,7 +63,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   @Override
   protected EClass eStaticClass()
   {
-    return MusyPackage.Literals.MODEL;
+    return MusyPackage.Literals.MORE_TRACK_BODY;
   }
 
   /**
@@ -71,13 +71,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Greeting> getGreetings()
+  public EList<BodyComponent> getMorebody()
   {
-    if (greetings == null)
+    if (morebody == null)
     {
-      greetings = new EObjectContainmentEList<Greeting>(Greeting.class, this, MusyPackage.MODEL__GREETINGS);
+      morebody = new EObjectContainmentEList<BodyComponent>(BodyComponent.class, this, MusyPackage.MORE_TRACK_BODY__MOREBODY);
     }
-    return greetings;
+    return morebody;
   }
 
   /**
@@ -90,8 +90,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MusyPackage.MODEL__GREETINGS:
-        return ((InternalEList<?>)getGreetings()).basicRemove(otherEnd, msgs);
+      case MusyPackage.MORE_TRACK_BODY__MOREBODY:
+        return ((InternalEList<?>)getMorebody()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -106,8 +106,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MusyPackage.MODEL__GREETINGS:
-        return getGreetings();
+      case MusyPackage.MORE_TRACK_BODY__MOREBODY:
+        return getMorebody();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -123,9 +123,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MusyPackage.MODEL__GREETINGS:
-        getGreetings().clear();
-        getGreetings().addAll((Collection<? extends Greeting>)newValue);
+      case MusyPackage.MORE_TRACK_BODY__MOREBODY:
+        getMorebody().clear();
+        getMorebody().addAll((Collection<? extends BodyComponent>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +141,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MusyPackage.MODEL__GREETINGS:
-        getGreetings().clear();
+      case MusyPackage.MORE_TRACK_BODY__MOREBODY:
+        getMorebody().clear();
         return;
     }
     super.eUnset(featureID);
@@ -158,10 +158,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MusyPackage.MODEL__GREETINGS:
-        return greetings != null && !greetings.isEmpty();
+      case MusyPackage.MORE_TRACK_BODY__MOREBODY:
+        return morebody != null && !morebody.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ModelImpl
+} //MoreTrackBodyImpl

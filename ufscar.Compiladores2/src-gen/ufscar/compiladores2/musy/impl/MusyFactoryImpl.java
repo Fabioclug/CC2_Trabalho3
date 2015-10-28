@@ -64,8 +64,19 @@ public class MusyFactoryImpl extends EFactoryImpl implements MusyFactory
   {
     switch (eClass.getClassifierID())
     {
-      case MusyPackage.MODEL: return createModel();
-      case MusyPackage.GREETING: return createGreeting();
+      case MusyPackage.MIDI: return createMidi();
+      case MusyPackage.MIDI_BODY: return createMidiBody();
+      case MusyPackage.PARAMETER: return createParameter();
+      case MusyPackage.TRACK: return createTrack();
+      case MusyPackage.TRACK_BODY: return createTrackBody();
+      case MusyPackage.MORE_TRACK_BODY: return createMoreTrackBody();
+      case MusyPackage.BODY_COMPONENT: return createBodyComponent();
+      case MusyPackage.BLOCK: return createBlock();
+      case MusyPackage.TIME_SIGNATURE: return createTimeSignature();
+      case MusyPackage.CUSTOM_NOTE: return createCustomNote();
+      case MusyPackage.CHORD: return createChord();
+      case MusyPackage.CHORD_PARAMS: return createChordParams();
+      case MusyPackage.CUSTOM_NOTE_PARAM: return createCustomNoteParam();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -76,10 +87,10 @@ public class MusyFactoryImpl extends EFactoryImpl implements MusyFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  public Midi createMidi()
   {
-    ModelImpl model = new ModelImpl();
-    return model;
+    MidiImpl midi = new MidiImpl();
+    return midi;
   }
 
   /**
@@ -87,10 +98,131 @@ public class MusyFactoryImpl extends EFactoryImpl implements MusyFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Greeting createGreeting()
+  public MidiBody createMidiBody()
   {
-    GreetingImpl greeting = new GreetingImpl();
-    return greeting;
+    MidiBodyImpl midiBody = new MidiBodyImpl();
+    return midiBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Parameter createParameter()
+  {
+    ParameterImpl parameter = new ParameterImpl();
+    return parameter;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Track createTrack()
+  {
+    TrackImpl track = new TrackImpl();
+    return track;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TrackBody createTrackBody()
+  {
+    TrackBodyImpl trackBody = new TrackBodyImpl();
+    return trackBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MoreTrackBody createMoreTrackBody()
+  {
+    MoreTrackBodyImpl moreTrackBody = new MoreTrackBodyImpl();
+    return moreTrackBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BodyComponent createBodyComponent()
+  {
+    BodyComponentImpl bodyComponent = new BodyComponentImpl();
+    return bodyComponent;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Block createBlock()
+  {
+    BlockImpl block = new BlockImpl();
+    return block;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TimeSignature createTimeSignature()
+  {
+    TimeSignatureImpl timeSignature = new TimeSignatureImpl();
+    return timeSignature;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CustomNote createCustomNote()
+  {
+    CustomNoteImpl customNote = new CustomNoteImpl();
+    return customNote;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Chord createChord()
+  {
+    ChordImpl chord = new ChordImpl();
+    return chord;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ChordParams createChordParams()
+  {
+    ChordParamsImpl chordParams = new ChordParamsImpl();
+    return chordParams;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CustomNoteParam createCustomNoteParam()
+  {
+    CustomNoteParamImpl customNoteParam = new CustomNoteParamImpl();
+    return customNoteParam;
   }
 
   /**

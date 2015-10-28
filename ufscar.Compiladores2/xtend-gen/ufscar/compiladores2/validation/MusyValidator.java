@@ -3,6 +3,9 @@
  */
 package ufscar.compiladores2.validation;
 
+import com.google.common.base.Objects;
+import org.eclipse.xtext.validation.Check;
+import ufscar.compiladores2.musy.Parameter;
 import ufscar.compiladores2.validation.AbstractMusyValidator;
 
 /**
@@ -12,4 +15,28 @@ import ufscar.compiladores2.validation.AbstractMusyValidator;
  */
 @SuppressWarnings("all")
 public class MusyValidator extends AbstractMusyValidator {
+  @Check
+  public void checkBPM(final Parameter p) {
+    boolean _and = false;
+    String _type = p.getType();
+    boolean _equals = Objects.equal(_type, "bpm");
+    if (!_equals) {
+      _and = false;
+    } else {
+      boolean _or = false;
+      int _beat = p.getBeat();
+      boolean _lessThan = (_beat < 1);
+      if (_lessThan) {
+        _or = true;
+      } else {
+        int _beat_1 = p.getBeat();
+        boolean _greaterThan = (_beat_1 > 500);
+        _or = _greaterThan;
+      }
+      _and = _or;
+    }
+    if (_and) {
+      this.error("Beat must be between 1 and 500", null);
+    }
+  }
 }

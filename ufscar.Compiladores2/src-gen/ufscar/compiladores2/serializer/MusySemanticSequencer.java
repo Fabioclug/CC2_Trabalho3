@@ -16,9 +16,18 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEOb
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
-import ufscar.compiladores2.musy.Greeting;
-import ufscar.compiladores2.musy.Model;
+import ufscar.compiladores2.musy.Block;
+import ufscar.compiladores2.musy.BodyComponent;
+import ufscar.compiladores2.musy.ChordParams;
+import ufscar.compiladores2.musy.CustomNoteParam;
+import ufscar.compiladores2.musy.Midi;
+import ufscar.compiladores2.musy.MidiBody;
+import ufscar.compiladores2.musy.MoreTrackBody;
 import ufscar.compiladores2.musy.MusyPackage;
+import ufscar.compiladores2.musy.Parameter;
+import ufscar.compiladores2.musy.TimeSignature;
+import ufscar.compiladores2.musy.Track;
+import ufscar.compiladores2.musy.TrackBody;
 import ufscar.compiladores2.services.MusyGrammarAccess;
 
 @SuppressWarnings("all")
@@ -30,11 +39,57 @@ public class MusySemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == MusyPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
-			case MusyPackage.GREETING:
-				sequence_Greeting(context, (Greeting) semanticObject); 
+			case MusyPackage.BLOCK:
+				sequence_Block(context, (Block) semanticObject); 
 				return; 
-			case MusyPackage.MODEL:
-				sequence_Model(context, (Model) semanticObject); 
+			case MusyPackage.BODY_COMPONENT:
+				sequence_BodyComponent(context, (BodyComponent) semanticObject); 
+				return; 
+			case MusyPackage.CHORD_PARAMS:
+				if(context == grammarAccess.getChordParamsRule()) {
+					sequence_ChordParams(context, (ChordParams) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getChordRule()) {
+					sequence_Chord_ChordParams(context, (ChordParams) semanticObject); 
+					return; 
+				}
+				else break;
+			case MusyPackage.CUSTOM_NOTE_PARAM:
+				if(context == grammarAccess.getChordParamsRule()) {
+					sequence_ChordParams_CustomNoteParam(context, (CustomNoteParam) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getChordRule()) {
+					sequence_Chord_ChordParams_CustomNoteParam(context, (CustomNoteParam) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getCustomNoteRule() ||
+				   context == grammarAccess.getCustomNoteParamRule()) {
+					sequence_CustomNoteParam(context, (CustomNoteParam) semanticObject); 
+					return; 
+				}
+				else break;
+			case MusyPackage.MIDI:
+				sequence_Midi(context, (Midi) semanticObject); 
+				return; 
+			case MusyPackage.MIDI_BODY:
+				sequence_MidiBody(context, (MidiBody) semanticObject); 
+				return; 
+			case MusyPackage.MORE_TRACK_BODY:
+				sequence_MoreTrackBody(context, (MoreTrackBody) semanticObject); 
+				return; 
+			case MusyPackage.PARAMETER:
+				sequence_Parameter(context, (Parameter) semanticObject); 
+				return; 
+			case MusyPackage.TIME_SIGNATURE:
+				sequence_TimeSignature(context, (TimeSignature) semanticObject); 
+				return; 
+			case MusyPackage.TRACK:
+				sequence_Track(context, (Track) semanticObject); 
+				return; 
+			case MusyPackage.TRACK_BODY:
+				sequence_TrackBody(context, (TrackBody) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
@@ -42,25 +97,156 @@ public class MusySemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     name=ID
+	 *     (name=ID blockbody+=TrackBody*)
 	 */
-	protected void sequence_Greeting(EObject context, Greeting semanticObject) {
+	protected void sequence_Block(EObject context, Block semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (cnote=CustomNote | note=Note | block=Block | chord=Chord)
+	 */
+	protected void sequence_BodyComponent(EObject context, BodyComponent semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     cnotes+=CustomNote*
+	 */
+	protected void sequence_ChordParams(EObject context, ChordParams semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (octave=INT cnotes+=CustomNote*)
+	 */
+	protected void sequence_ChordParams_CustomNoteParam(EObject context, CustomNoteParam semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (cnotes+=CustomNote+ name=ID)
+	 */
+	protected void sequence_Chord_ChordParams(EObject context, ChordParams semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (octave=INT cnotes+=CustomNote* name=ID)
+	 */
+	protected void sequence_Chord_ChordParams_CustomNoteParam(EObject context, CustomNoteParam semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     octave=INT
+	 */
+	protected void sequence_CustomNoteParam(EObject context, CustomNoteParam semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (param+=Parameter* tracks+=Track*)
+	 */
+	protected void sequence_MidiBody(EObject context, MidiBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name=ID body=MidiBody)
+	 */
+	protected void sequence_Midi(EObject context, Midi semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, MusyPackage.Literals.GREETING__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MusyPackage.Literals.GREETING__NAME));
+			if(transientValues.isValueTransient(semanticObject, MusyPackage.Literals.MIDI__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MusyPackage.Literals.MIDI__NAME));
+			if(transientValues.isValueTransient(semanticObject, MusyPackage.Literals.MIDI__BODY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MusyPackage.Literals.MIDI__BODY));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getMidiAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getMidiAccess().getBodyMidiBodyParserRuleCall_3_0(), semanticObject.getBody());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     greetings+=Greeting*
+	 *     morebody+=BodyComponent+
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_MoreTrackBody(EObject context, MoreTrackBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (beat=INT type='bpm')
+	 */
+	protected void sequence_Parameter(EObject context, Parameter semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (quantity=INT note=INT)
+	 */
+	protected void sequence_TimeSignature(EObject context, TimeSignature semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, MusyPackage.Literals.TIME_SIGNATURE__QUANTITY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MusyPackage.Literals.TIME_SIGNATURE__QUANTITY));
+			if(transientValues.isValueTransient(semanticObject, MusyPackage.Literals.TIME_SIGNATURE__NOTE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MusyPackage.Literals.TIME_SIGNATURE__NOTE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getTimeSignatureAccess().getQuantityINTTerminalRuleCall_0_0(), semanticObject.getQuantity());
+		feeder.accept(grammarAccess.getTimeSignatureAccess().getNoteINTTerminalRuleCall_2_0(), semanticObject.getNote());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (body=BodyComponent more=MoreTrackBody?)
+	 */
+	protected void sequence_TrackBody(EObject context, TrackBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name=ID tbody=TrackBody)
+	 */
+	protected void sequence_Track(EObject context, Track semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, MusyPackage.Literals.TRACK__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MusyPackage.Literals.TRACK__NAME));
+			if(transientValues.isValueTransient(semanticObject, MusyPackage.Literals.TRACK__TBODY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MusyPackage.Literals.TRACK__TBODY));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getTrackAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getTrackAccess().getTbodyTrackBodyParserRuleCall_5_0(), semanticObject.getTbody());
+		feeder.finish();
 	}
 }

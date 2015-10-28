@@ -7,52 +7,51 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import ufscar.compiladores2.musy.Greeting;
+import ufscar.compiladores2.musy.CustomNoteParam;
 import ufscar.compiladores2.musy.MusyPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Greeting</b></em>'.
+ * An implementation of the model object '<em><b>Custom Note Param</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ufscar.compiladores2.musy.impl.GreetingImpl#getName <em>Name</em>}</li>
+ *   <li>{@link ufscar.compiladores2.musy.impl.CustomNoteParamImpl#getOctave <em>Octave</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeting
+public class CustomNoteParamImpl extends CustomNoteImpl implements CustomNoteParam
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The default value of the '{@link #getOctave() <em>Octave</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getOctave()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
+  protected static final int OCTAVE_EDEFAULT = 0;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getOctave() <em>Octave</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getOctave()
    * @generated
    * @ordered
    */
-  protected String name = NAME_EDEFAULT;
+  protected int octave = OCTAVE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected GreetingImpl()
+  protected CustomNoteParamImpl()
   {
     super();
   }
@@ -65,7 +64,7 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   @Override
   protected EClass eStaticClass()
   {
-    return MusyPackage.Literals.GREETING;
+    return MusyPackage.Literals.CUSTOM_NOTE_PARAM;
   }
 
   /**
@@ -73,9 +72,9 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  public int getOctave()
   {
-    return name;
+    return octave;
   }
 
   /**
@@ -83,12 +82,12 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  public void setOctave(int newOctave)
   {
-    String oldName = name;
-    name = newName;
+    int oldOctave = octave;
+    octave = newOctave;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.GREETING__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.CUSTOM_NOTE_PARAM__OCTAVE, oldOctave, octave));
   }
 
   /**
@@ -101,8 +100,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case MusyPackage.GREETING__NAME:
-        return getName();
+      case MusyPackage.CUSTOM_NOTE_PARAM__OCTAVE:
+        return getOctave();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -117,8 +116,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case MusyPackage.GREETING__NAME:
-        setName((String)newValue);
+      case MusyPackage.CUSTOM_NOTE_PARAM__OCTAVE:
+        setOctave((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -134,8 +133,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case MusyPackage.GREETING__NAME:
-        setName(NAME_EDEFAULT);
+      case MusyPackage.CUSTOM_NOTE_PARAM__OCTAVE:
+        setOctave(OCTAVE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -151,8 +150,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case MusyPackage.GREETING__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case MusyPackage.CUSTOM_NOTE_PARAM__OCTAVE:
+        return octave != OCTAVE_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -168,10 +167,10 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
+    result.append(" (octave: ");
+    result.append(octave);
     result.append(')');
     return result.toString();
   }
 
-} //GreetingImpl
+} //CustomNoteParamImpl

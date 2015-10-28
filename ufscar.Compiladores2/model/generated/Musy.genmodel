@@ -7,11 +7,55 @@
     editorPluginID="ufscar.Compiladores2.editor" runtimeVersion="2.11">
   <genPackages prefix="Musy" basePackage="ufscar.compiladores2" disposableProviderFactory="true"
       fileExtensions="musy" ecorePackage="Musy.ecore#/">
-    <genClasses ecoreClass="Musy.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//Model/greetings"/>
+    <genClasses ecoreClass="Musy.ecore#//Midi">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//Midi/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//Midi/body"/>
     </genClasses>
-    <genClasses ecoreClass="Musy.ecore#//Greeting">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//Greeting/name"/>
+    <genClasses ecoreClass="Musy.ecore#//MidiBody">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//MidiBody/param"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//MidiBody/tracks"/>
+    </genClasses>
+    <genClasses ecoreClass="Musy.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//Parameter/beat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//Parameter/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//Parameter/tsig"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//Parameter/tn"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//Parameter/tp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//Parameter/octave"/>
+    </genClasses>
+    <genClasses ecoreClass="Musy.ecore#//Track">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//Track/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//Track/tbody"/>
+    </genClasses>
+    <genClasses ecoreClass="Musy.ecore#//TrackBody">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//TrackBody/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//TrackBody/more"/>
+    </genClasses>
+    <genClasses ecoreClass="Musy.ecore#//MoreTrackBody">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//MoreTrackBody/morebody"/>
+    </genClasses>
+    <genClasses ecoreClass="Musy.ecore#//BodyComponent">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//BodyComponent/cnote"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//BodyComponent/note"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//BodyComponent/block"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//BodyComponent/chord"/>
+    </genClasses>
+    <genClasses ecoreClass="Musy.ecore#//Block">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//Block/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//Block/blockbody"/>
+    </genClasses>
+    <genClasses ecoreClass="Musy.ecore#//TimeSignature">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//TimeSignature/quantity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//TimeSignature/note"/>
+    </genClasses>
+    <genClasses ecoreClass="Musy.ecore#//CustomNote"/>
+    <genClasses ecoreClass="Musy.ecore#//Chord"/>
+    <genClasses ecoreClass="Musy.ecore#//ChordParams">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//ChordParams/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Musy.ecore#//ChordParams/cnotes"/>
+    </genClasses>
+    <genClasses ecoreClass="Musy.ecore#//CustomNoteParam">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Musy.ecore#//CustomNoteParam/octave"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
