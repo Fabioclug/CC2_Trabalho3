@@ -13,9 +13,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import ufscar.compiladores2.musy.Block;
 import ufscar.compiladores2.musy.BodyComponent;
-import ufscar.compiladores2.musy.Chord;
-import ufscar.compiladores2.musy.CustomNote;
+import ufscar.compiladores2.musy.DeclaredChord;
 import ufscar.compiladores2.musy.MusyPackage;
+import ufscar.compiladores2.musy.Note;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,10 +25,9 @@ import ufscar.compiladores2.musy.MusyPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ufscar.compiladores2.musy.impl.BodyComponentImpl#getCnote <em>Cnote</em>}</li>
  *   <li>{@link ufscar.compiladores2.musy.impl.BodyComponentImpl#getNote <em>Note</em>}</li>
  *   <li>{@link ufscar.compiladores2.musy.impl.BodyComponentImpl#getBlock <em>Block</em>}</li>
- *   <li>{@link ufscar.compiladores2.musy.impl.BodyComponentImpl#getChord <em>Chord</em>}</li>
+ *   <li>{@link ufscar.compiladores2.musy.impl.BodyComponentImpl#getCh <em>Ch</em>}</li>
  * </ul>
  *
  * @generated
@@ -36,34 +35,14 @@ import ufscar.compiladores2.musy.MusyPackage;
 public class BodyComponentImpl extends MinimalEObjectImpl.Container implements BodyComponent
 {
   /**
-   * The cached value of the '{@link #getCnote() <em>Cnote</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getCnote()
-   * @generated
-   * @ordered
-   */
-  protected CustomNote cnote;
-
-  /**
-   * The default value of the '{@link #getNote() <em>Note</em>}' attribute.
+   * The cached value of the '{@link #getNote() <em>Note</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getNote()
    * @generated
    * @ordered
    */
-  protected static final String NOTE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getNote() <em>Note</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNote()
-   * @generated
-   * @ordered
-   */
-  protected String note = NOTE_EDEFAULT;
+  protected Note note;
 
   /**
    * The cached value of the '{@link #getBlock() <em>Block</em>}' containment reference.
@@ -76,14 +55,14 @@ public class BodyComponentImpl extends MinimalEObjectImpl.Container implements B
   protected Block block;
 
   /**
-   * The cached value of the '{@link #getChord() <em>Chord</em>}' containment reference.
+   * The cached value of the '{@link #getCh() <em>Ch</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getChord()
+   * @see #getCh()
    * @generated
    * @ordered
    */
-  protected Chord chord;
+  protected DeclaredChord ch;
 
   /**
    * <!-- begin-user-doc -->
@@ -111,9 +90,9 @@ public class BodyComponentImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
-  public CustomNote getCnote()
+  public Note getNote()
   {
-    return cnote;
+    return note;
   }
 
   /**
@@ -121,13 +100,13 @@ public class BodyComponentImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetCnote(CustomNote newCnote, NotificationChain msgs)
+  public NotificationChain basicSetNote(Note newNote, NotificationChain msgs)
   {
-    CustomNote oldCnote = cnote;
-    cnote = newCnote;
+    Note oldNote = note;
+    note = newNote;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MusyPackage.BODY_COMPONENT__CNOTE, oldCnote, newCnote);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MusyPackage.BODY_COMPONENT__NOTE, oldNote, newNote);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -138,43 +117,20 @@ public class BodyComponentImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setCnote(CustomNote newCnote)
+  public void setNote(Note newNote)
   {
-    if (newCnote != cnote)
+    if (newNote != note)
     {
       NotificationChain msgs = null;
-      if (cnote != null)
-        msgs = ((InternalEObject)cnote).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MusyPackage.BODY_COMPONENT__CNOTE, null, msgs);
-      if (newCnote != null)
-        msgs = ((InternalEObject)newCnote).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MusyPackage.BODY_COMPONENT__CNOTE, null, msgs);
-      msgs = basicSetCnote(newCnote, msgs);
+      if (note != null)
+        msgs = ((InternalEObject)note).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MusyPackage.BODY_COMPONENT__NOTE, null, msgs);
+      if (newNote != null)
+        msgs = ((InternalEObject)newNote).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MusyPackage.BODY_COMPONENT__NOTE, null, msgs);
+      msgs = basicSetNote(newNote, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.BODY_COMPONENT__CNOTE, newCnote, newCnote));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getNote()
-  {
-    return note;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setNote(String newNote)
-  {
-    String oldNote = note;
-    note = newNote;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.BODY_COMPONENT__NOTE, oldNote, note));
+      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.BODY_COMPONENT__NOTE, newNote, newNote));
   }
 
   /**
@@ -230,9 +186,19 @@ public class BodyComponentImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
-  public Chord getChord()
+  public DeclaredChord getCh()
   {
-    return chord;
+    if (ch != null && ch.eIsProxy())
+    {
+      InternalEObject oldCh = (InternalEObject)ch;
+      ch = (DeclaredChord)eResolveProxy(oldCh);
+      if (ch != oldCh)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MusyPackage.BODY_COMPONENT__CH, oldCh, ch));
+      }
+    }
+    return ch;
   }
 
   /**
@@ -240,37 +206,22 @@ public class BodyComponentImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetChord(Chord newChord, NotificationChain msgs)
+  public DeclaredChord basicGetCh()
   {
-    Chord oldChord = chord;
-    chord = newChord;
+    return ch;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setCh(DeclaredChord newCh)
+  {
+    DeclaredChord oldCh = ch;
+    ch = newCh;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MusyPackage.BODY_COMPONENT__CHORD, oldChord, newChord);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setChord(Chord newChord)
-  {
-    if (newChord != chord)
-    {
-      NotificationChain msgs = null;
-      if (chord != null)
-        msgs = ((InternalEObject)chord).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MusyPackage.BODY_COMPONENT__CHORD, null, msgs);
-      if (newChord != null)
-        msgs = ((InternalEObject)newChord).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MusyPackage.BODY_COMPONENT__CHORD, null, msgs);
-      msgs = basicSetChord(newChord, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.BODY_COMPONENT__CHORD, newChord, newChord));
+      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.BODY_COMPONENT__CH, oldCh, ch));
   }
 
   /**
@@ -283,12 +234,10 @@ public class BodyComponentImpl extends MinimalEObjectImpl.Container implements B
   {
     switch (featureID)
     {
-      case MusyPackage.BODY_COMPONENT__CNOTE:
-        return basicSetCnote(null, msgs);
+      case MusyPackage.BODY_COMPONENT__NOTE:
+        return basicSetNote(null, msgs);
       case MusyPackage.BODY_COMPONENT__BLOCK:
         return basicSetBlock(null, msgs);
-      case MusyPackage.BODY_COMPONENT__CHORD:
-        return basicSetChord(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -303,14 +252,13 @@ public class BodyComponentImpl extends MinimalEObjectImpl.Container implements B
   {
     switch (featureID)
     {
-      case MusyPackage.BODY_COMPONENT__CNOTE:
-        return getCnote();
       case MusyPackage.BODY_COMPONENT__NOTE:
         return getNote();
       case MusyPackage.BODY_COMPONENT__BLOCK:
         return getBlock();
-      case MusyPackage.BODY_COMPONENT__CHORD:
-        return getChord();
+      case MusyPackage.BODY_COMPONENT__CH:
+        if (resolve) return getCh();
+        return basicGetCh();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -325,17 +273,14 @@ public class BodyComponentImpl extends MinimalEObjectImpl.Container implements B
   {
     switch (featureID)
     {
-      case MusyPackage.BODY_COMPONENT__CNOTE:
-        setCnote((CustomNote)newValue);
-        return;
       case MusyPackage.BODY_COMPONENT__NOTE:
-        setNote((String)newValue);
+        setNote((Note)newValue);
         return;
       case MusyPackage.BODY_COMPONENT__BLOCK:
         setBlock((Block)newValue);
         return;
-      case MusyPackage.BODY_COMPONENT__CHORD:
-        setChord((Chord)newValue);
+      case MusyPackage.BODY_COMPONENT__CH:
+        setCh((DeclaredChord)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -351,17 +296,14 @@ public class BodyComponentImpl extends MinimalEObjectImpl.Container implements B
   {
     switch (featureID)
     {
-      case MusyPackage.BODY_COMPONENT__CNOTE:
-        setCnote((CustomNote)null);
-        return;
       case MusyPackage.BODY_COMPONENT__NOTE:
-        setNote(NOTE_EDEFAULT);
+        setNote((Note)null);
         return;
       case MusyPackage.BODY_COMPONENT__BLOCK:
         setBlock((Block)null);
         return;
-      case MusyPackage.BODY_COMPONENT__CHORD:
-        setChord((Chord)null);
+      case MusyPackage.BODY_COMPONENT__CH:
+        setCh((DeclaredChord)null);
         return;
     }
     super.eUnset(featureID);
@@ -377,33 +319,14 @@ public class BodyComponentImpl extends MinimalEObjectImpl.Container implements B
   {
     switch (featureID)
     {
-      case MusyPackage.BODY_COMPONENT__CNOTE:
-        return cnote != null;
       case MusyPackage.BODY_COMPONENT__NOTE:
-        return NOTE_EDEFAULT == null ? note != null : !NOTE_EDEFAULT.equals(note);
+        return note != null;
       case MusyPackage.BODY_COMPONENT__BLOCK:
         return block != null;
-      case MusyPackage.BODY_COMPONENT__CHORD:
-        return chord != null;
+      case MusyPackage.BODY_COMPONENT__CH:
+        return ch != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (note: ");
-    result.append(note);
-    result.append(')');
-    return result.toString();
   }
 
 } //BodyComponentImpl

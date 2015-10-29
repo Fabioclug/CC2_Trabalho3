@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import ufscar.compiladores2.musy.DeclaredChord;
 import ufscar.compiladores2.musy.MidiBody;
 import ufscar.compiladores2.musy.MusyPackage;
 import ufscar.compiladores2.musy.Parameter;
@@ -30,6 +31,7 @@ import ufscar.compiladores2.musy.Track;
  * </p>
  * <ul>
  *   <li>{@link ufscar.compiladores2.musy.impl.MidiBodyImpl#getParam <em>Param</em>}</li>
+ *   <li>{@link ufscar.compiladores2.musy.impl.MidiBodyImpl#getChords <em>Chords</em>}</li>
  *   <li>{@link ufscar.compiladores2.musy.impl.MidiBodyImpl#getTracks <em>Tracks</em>}</li>
  * </ul>
  *
@@ -46,6 +48,16 @@ public class MidiBodyImpl extends MinimalEObjectImpl.Container implements MidiBo
    * @ordered
    */
   protected EList<Parameter> param;
+
+  /**
+   * The cached value of the '{@link #getChords() <em>Chords</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getChords()
+   * @generated
+   * @ordered
+   */
+  protected EList<DeclaredChord> chords;
 
   /**
    * The cached value of the '{@link #getTracks() <em>Tracks</em>}' containment reference list.
@@ -97,6 +109,20 @@ public class MidiBodyImpl extends MinimalEObjectImpl.Container implements MidiBo
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<DeclaredChord> getChords()
+  {
+    if (chords == null)
+    {
+      chords = new EObjectContainmentEList<DeclaredChord>(DeclaredChord.class, this, MusyPackage.MIDI_BODY__CHORDS);
+    }
+    return chords;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<Track> getTracks()
   {
     if (tracks == null)
@@ -118,6 +144,8 @@ public class MidiBodyImpl extends MinimalEObjectImpl.Container implements MidiBo
     {
       case MusyPackage.MIDI_BODY__PARAM:
         return ((InternalEList<?>)getParam()).basicRemove(otherEnd, msgs);
+      case MusyPackage.MIDI_BODY__CHORDS:
+        return ((InternalEList<?>)getChords()).basicRemove(otherEnd, msgs);
       case MusyPackage.MIDI_BODY__TRACKS:
         return ((InternalEList<?>)getTracks()).basicRemove(otherEnd, msgs);
     }
@@ -136,6 +164,8 @@ public class MidiBodyImpl extends MinimalEObjectImpl.Container implements MidiBo
     {
       case MusyPackage.MIDI_BODY__PARAM:
         return getParam();
+      case MusyPackage.MIDI_BODY__CHORDS:
+        return getChords();
       case MusyPackage.MIDI_BODY__TRACKS:
         return getTracks();
     }
@@ -156,6 +186,10 @@ public class MidiBodyImpl extends MinimalEObjectImpl.Container implements MidiBo
       case MusyPackage.MIDI_BODY__PARAM:
         getParam().clear();
         getParam().addAll((Collection<? extends Parameter>)newValue);
+        return;
+      case MusyPackage.MIDI_BODY__CHORDS:
+        getChords().clear();
+        getChords().addAll((Collection<? extends DeclaredChord>)newValue);
         return;
       case MusyPackage.MIDI_BODY__TRACKS:
         getTracks().clear();
@@ -178,6 +212,9 @@ public class MidiBodyImpl extends MinimalEObjectImpl.Container implements MidiBo
       case MusyPackage.MIDI_BODY__PARAM:
         getParam().clear();
         return;
+      case MusyPackage.MIDI_BODY__CHORDS:
+        getChords().clear();
+        return;
       case MusyPackage.MIDI_BODY__TRACKS:
         getTracks().clear();
         return;
@@ -197,6 +234,8 @@ public class MidiBodyImpl extends MinimalEObjectImpl.Container implements MidiBo
     {
       case MusyPackage.MIDI_BODY__PARAM:
         return param != null && !param.isEmpty();
+      case MusyPackage.MIDI_BODY__CHORDS:
+        return chords != null && !chords.isEmpty();
       case MusyPackage.MIDI_BODY__TRACKS:
         return tracks != null && !tracks.isEmpty();
     }

@@ -9,41 +9,48 @@
   <eClassifiers xsi:type="ecore:EClass" name="MidiBody">
     <eStructuralFeatures xsi:type="ecore:EReference" name="param" upperBound="-1"
         eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chords" upperBound="-1"
+        eType="#//DeclaredChord" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tracks" upperBound="-1"
         eType="#//Track" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterBeat" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="beat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterTimeSignature" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="tsig" eType="#//TimeSignature"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterTimeNote" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterTimePause" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterOctave" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="octave" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeclaredChord">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cp" eType="#//ChordParams"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Track">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tbody" eType="#//TrackBody"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TrackBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//BodyComponent"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bc" upperBound="-1" eType="#//BodyComponent"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="more" eType="#//MoreTrackBody"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MoreTrackBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="morebody" upperBound="-1"
-        eType="#//BodyComponent" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BodyComponent">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="cnote" eType="#//CustomNote"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="note" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="note" eType="#//Note" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//Block"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="chord" eType="#//Chord"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ch" eType="#//DeclaredChord"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Block">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -54,14 +61,18 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="quantity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="note" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CustomNote" eSuperTypes="#//ChordParams"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Chord"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ChordParams" eSuperTypes="#//Chord">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="cnotes" upperBound="-1"
-        eType="#//CustomNote" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChordParams">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cnote" upperBound="-1"
+        eType="#//Note" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CustomNoteParam" eSuperTypes="#//CustomNote">
+  <eClassifiers xsi:type="ecore:EClass" name="Note">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="acc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cnp" eType="#//CustomNoteParam"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomNoteParam">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="octave" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

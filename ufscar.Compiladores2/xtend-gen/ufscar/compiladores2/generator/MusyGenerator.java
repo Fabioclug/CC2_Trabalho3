@@ -3,9 +3,25 @@
  */
 package ufscar.compiladores2.generator;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterators;
+import java.util.Iterator;
+import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import ufscar.compiladores2.musy.BodyComponent;
+import ufscar.compiladores2.musy.DeclaredChord;
+import ufscar.compiladores2.musy.Midi;
+import ufscar.compiladores2.musy.MidiBody;
+import ufscar.compiladores2.musy.Note;
+import ufscar.compiladores2.musy.Track;
+import ufscar.compiladores2.musy.TrackBody;
 
 /**
  * Generates code from your model files on save.
@@ -16,5 +32,61 @@ import org.eclipse.xtext.generator.IGenerator;
 public class MusyGenerator implements IGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
+    TreeIterator<EObject> _allContents = resource.getAllContents();
+    Iterator<Midi> _filter = Iterators.<Midi>filter(_allContents, Midi.class);
+    List<Midi> _list = IteratorExtensions.<Midi>toList(_filter);
+    Midi _get = _list.get(0);
+    CharSequence _compile = this.compile(_get);
+    String _plus = ("Notas: " + _compile);
+    fsa.generateFile("greetings.txt", _plus);
+  }
+  
+  public CharSequence compile(final Midi m) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Musica gerada: ");
+    String _name = m.getName();
+    _builder.append(_name, "");
+    _builder.append(". ");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    MidiBody _body = m.getBody();
+    EList<Track> _tracks = _body.getTracks();
+    Track _get = _tracks.get(0);
+    String _name_1 = _get.getName();
+    _builder.append(_name_1, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    {
+      MidiBody _body_1 = m.getBody();
+      EList<Track> _tracks_1 = _body_1.getTracks();
+      Track _get_1 = _tracks_1.get(0);
+      TrackBody _tbody = _get_1.getTbody();
+      EList<BodyComponent> _bc = _tbody.getBc();
+      for(final BodyComponent bodyComponent : _bc) {
+        {
+          Note _note = bodyComponent.getNote();
+          boolean _notEquals = (!Objects.equal(_note, null));
+          if (_notEquals) {
+            _builder.append("Nota: ");
+            Note _note_1 = bodyComponent.getNote();
+            String _nl = _note_1.getNl();
+            _builder.append(_nl, "");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          DeclaredChord _ch = bodyComponent.getCh();
+          boolean _notEquals_1 = (!Objects.equal(_ch, null));
+          if (_notEquals_1) {
+            _builder.append("Acorde: ");
+            DeclaredChord _ch_1 = bodyComponent.getCh();
+            String _name_2 = _ch_1.getName();
+            _builder.append(_name_2, "");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    return _builder;
   }
 }

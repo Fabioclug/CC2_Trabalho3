@@ -50,6 +50,60 @@ public interface MusyFactory extends EFactory
   Parameter createParameter();
 
   /**
+   * Returns a new object of class '<em>Parameter Beat</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameter Beat</em>'.
+   * @generated
+   */
+  ParameterBeat createParameterBeat();
+
+  /**
+   * Returns a new object of class '<em>Parameter Time Signature</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameter Time Signature</em>'.
+   * @generated
+   */
+  ParameterTimeSignature createParameterTimeSignature();
+
+  /**
+   * Returns a new object of class '<em>Parameter Time Note</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameter Time Note</em>'.
+   * @generated
+   */
+  ParameterTimeNote createParameterTimeNote();
+
+  /**
+   * Returns a new object of class '<em>Parameter Time Pause</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameter Time Pause</em>'.
+   * @generated
+   */
+  ParameterTimePause createParameterTimePause();
+
+  /**
+   * Returns a new object of class '<em>Parameter Octave</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameter Octave</em>'.
+   * @generated
+   */
+  ParameterOctave createParameterOctave();
+
+  /**
+   * Returns a new object of class '<em>Declared Chord</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Declared Chord</em>'.
+   * @generated
+   */
+  DeclaredChord createDeclaredChord();
+
+  /**
    * Returns a new object of class '<em>Track</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -66,15 +120,6 @@ public interface MusyFactory extends EFactory
    * @generated
    */
   TrackBody createTrackBody();
-
-  /**
-   * Returns a new object of class '<em>More Track Body</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>More Track Body</em>'.
-   * @generated
-   */
-  MoreTrackBody createMoreTrackBody();
 
   /**
    * Returns a new object of class '<em>Body Component</em>'.
@@ -104,24 +149,6 @@ public interface MusyFactory extends EFactory
   TimeSignature createTimeSignature();
 
   /**
-   * Returns a new object of class '<em>Custom Note</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Custom Note</em>'.
-   * @generated
-   */
-  CustomNote createCustomNote();
-
-  /**
-   * Returns a new object of class '<em>Chord</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Chord</em>'.
-   * @generated
-   */
-  Chord createChord();
-
-  /**
    * Returns a new object of class '<em>Chord Params</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -129,6 +156,15 @@ public interface MusyFactory extends EFactory
    * @generated
    */
   ChordParams createChordParams();
+
+  /**
+   * Returns a new object of class '<em>Note</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Note</em>'.
+   * @generated
+   */
+  Note createNote();
 
   /**
    * Returns a new object of class '<em>Custom Note Param</em>'.

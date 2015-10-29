@@ -90,6 +90,36 @@ public class MusyAdapterFactory extends AdapterFactoryImpl
         return createParameterAdapter();
       }
       @Override
+      public Adapter caseParameterBeat(ParameterBeat object)
+      {
+        return createParameterBeatAdapter();
+      }
+      @Override
+      public Adapter caseParameterTimeSignature(ParameterTimeSignature object)
+      {
+        return createParameterTimeSignatureAdapter();
+      }
+      @Override
+      public Adapter caseParameterTimeNote(ParameterTimeNote object)
+      {
+        return createParameterTimeNoteAdapter();
+      }
+      @Override
+      public Adapter caseParameterTimePause(ParameterTimePause object)
+      {
+        return createParameterTimePauseAdapter();
+      }
+      @Override
+      public Adapter caseParameterOctave(ParameterOctave object)
+      {
+        return createParameterOctaveAdapter();
+      }
+      @Override
+      public Adapter caseDeclaredChord(DeclaredChord object)
+      {
+        return createDeclaredChordAdapter();
+      }
+      @Override
       public Adapter caseTrack(Track object)
       {
         return createTrackAdapter();
@@ -98,11 +128,6 @@ public class MusyAdapterFactory extends AdapterFactoryImpl
       public Adapter caseTrackBody(TrackBody object)
       {
         return createTrackBodyAdapter();
-      }
-      @Override
-      public Adapter caseMoreTrackBody(MoreTrackBody object)
-      {
-        return createMoreTrackBodyAdapter();
       }
       @Override
       public Adapter caseBodyComponent(BodyComponent object)
@@ -120,19 +145,14 @@ public class MusyAdapterFactory extends AdapterFactoryImpl
         return createTimeSignatureAdapter();
       }
       @Override
-      public Adapter caseCustomNote(CustomNote object)
-      {
-        return createCustomNoteAdapter();
-      }
-      @Override
-      public Adapter caseChord(Chord object)
-      {
-        return createChordAdapter();
-      }
-      @Override
       public Adapter caseChordParams(ChordParams object)
       {
         return createChordParamsAdapter();
+      }
+      @Override
+      public Adapter caseNote(Note object)
+      {
+        return createNoteAdapter();
       }
       @Override
       public Adapter caseCustomNoteParam(CustomNoteParam object)
@@ -207,6 +227,96 @@ public class MusyAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link ufscar.compiladores2.musy.ParameterBeat <em>Parameter Beat</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ufscar.compiladores2.musy.ParameterBeat
+   * @generated
+   */
+  public Adapter createParameterBeatAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ufscar.compiladores2.musy.ParameterTimeSignature <em>Parameter Time Signature</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ufscar.compiladores2.musy.ParameterTimeSignature
+   * @generated
+   */
+  public Adapter createParameterTimeSignatureAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ufscar.compiladores2.musy.ParameterTimeNote <em>Parameter Time Note</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ufscar.compiladores2.musy.ParameterTimeNote
+   * @generated
+   */
+  public Adapter createParameterTimeNoteAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ufscar.compiladores2.musy.ParameterTimePause <em>Parameter Time Pause</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ufscar.compiladores2.musy.ParameterTimePause
+   * @generated
+   */
+  public Adapter createParameterTimePauseAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ufscar.compiladores2.musy.ParameterOctave <em>Parameter Octave</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ufscar.compiladores2.musy.ParameterOctave
+   * @generated
+   */
+  public Adapter createParameterOctaveAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ufscar.compiladores2.musy.DeclaredChord <em>Declared Chord</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ufscar.compiladores2.musy.DeclaredChord
+   * @generated
+   */
+  public Adapter createDeclaredChordAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link ufscar.compiladores2.musy.Track <em>Track</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -232,21 +342,6 @@ public class MusyAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTrackBodyAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link ufscar.compiladores2.musy.MoreTrackBody <em>More Track Body</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see ufscar.compiladores2.musy.MoreTrackBody
-   * @generated
-   */
-  public Adapter createMoreTrackBodyAdapter()
   {
     return null;
   }
@@ -297,36 +392,6 @@ public class MusyAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link ufscar.compiladores2.musy.CustomNote <em>Custom Note</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see ufscar.compiladores2.musy.CustomNote
-   * @generated
-   */
-  public Adapter createCustomNoteAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link ufscar.compiladores2.musy.Chord <em>Chord</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see ufscar.compiladores2.musy.Chord
-   * @generated
-   */
-  public Adapter createChordAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link ufscar.compiladores2.musy.ChordParams <em>Chord Params</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -337,6 +402,21 @@ public class MusyAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createChordParamsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ufscar.compiladores2.musy.Note <em>Note</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ufscar.compiladores2.musy.Note
+   * @generated
+   */
+  public Adapter createNoteAdapter()
   {
     return null;
   }

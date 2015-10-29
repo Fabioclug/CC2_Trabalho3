@@ -4,7 +4,7 @@
 package ufscar.compiladores2.validation
 
 import org.eclipse.xtext.validation.Check
-import ufscar.compiladores2.musy.Parameter
+import ufscar.compiladores2.musy.ParameterBeat
 
 /**
  * This class contains custom validation rules. 
@@ -25,8 +25,8 @@ class MusyValidator extends AbstractMusyValidator {
 //	}
 
 	@Check
-	def void checkBPM(Parameter p) {
-		if(p.type == "bpm" && (p.beat < 1 || p.beat > 500))
-		error("Beat must be between 1 and 500", null);
+	def void checkBPM(ParameterBeat p) {
+		if(p.beat < 1 || p.beat > 500)
+			error("Beat must be between 1 and 500", null);
 	}
 }

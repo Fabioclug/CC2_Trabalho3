@@ -2,6 +2,8 @@
  */
 package ufscar.compiladores2.musy;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -13,8 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link ufscar.compiladores2.musy.TrackBody#getBody <em>Body</em>}</li>
- *   <li>{@link ufscar.compiladores2.musy.TrackBody#getMore <em>More</em>}</li>
+ *   <li>{@link ufscar.compiladores2.musy.TrackBody#getBc <em>Bc</em>}</li>
  * </ul>
  *
  * @see ufscar.compiladores2.musy.MusyPackage#getTrackBody()
@@ -24,55 +25,19 @@ import org.eclipse.emf.ecore.EObject;
 public interface TrackBody extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Body</b></em>' containment reference.
+   * Returns the value of the '<em><b>Bc</b></em>' containment reference list.
+   * The list contents are of type {@link ufscar.compiladores2.musy.BodyComponent}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Body</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Bc</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Body</em>' containment reference.
-   * @see #setBody(BodyComponent)
-   * @see ufscar.compiladores2.musy.MusyPackage#getTrackBody_Body()
+   * @return the value of the '<em>Bc</em>' containment reference list.
+   * @see ufscar.compiladores2.musy.MusyPackage#getTrackBody_Bc()
    * @model containment="true"
    * @generated
    */
-  BodyComponent getBody();
-
-  /**
-   * Sets the value of the '{@link ufscar.compiladores2.musy.TrackBody#getBody <em>Body</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Body</em>' containment reference.
-   * @see #getBody()
-   * @generated
-   */
-  void setBody(BodyComponent value);
-
-  /**
-   * Returns the value of the '<em><b>More</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>More</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>More</em>' containment reference.
-   * @see #setMore(MoreTrackBody)
-   * @see ufscar.compiladores2.musy.MusyPackage#getTrackBody_More()
-   * @model containment="true"
-   * @generated
-   */
-  MoreTrackBody getMore();
-
-  /**
-   * Sets the value of the '{@link ufscar.compiladores2.musy.TrackBody#getMore <em>More</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>More</em>' containment reference.
-   * @see #getMore()
-   * @generated
-   */
-  void setMore(MoreTrackBody value);
+  EList<BodyComponent> getBc();
 
 } // TrackBody

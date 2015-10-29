@@ -13,10 +13,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link ufscar.compiladores2.musy.BodyComponent#getCnote <em>Cnote</em>}</li>
  *   <li>{@link ufscar.compiladores2.musy.BodyComponent#getNote <em>Note</em>}</li>
  *   <li>{@link ufscar.compiladores2.musy.BodyComponent#getBlock <em>Block</em>}</li>
- *   <li>{@link ufscar.compiladores2.musy.BodyComponent#getChord <em>Chord</em>}</li>
+ *   <li>{@link ufscar.compiladores2.musy.BodyComponent#getCh <em>Ch</em>}</li>
  * </ul>
  *
  * @see ufscar.compiladores2.musy.MusyPackage#getBodyComponent()
@@ -26,56 +25,30 @@ import org.eclipse.emf.ecore.EObject;
 public interface BodyComponent extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Cnote</b></em>' containment reference.
+   * Returns the value of the '<em><b>Note</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Cnote</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Note</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Cnote</em>' containment reference.
-   * @see #setCnote(CustomNote)
-   * @see ufscar.compiladores2.musy.MusyPackage#getBodyComponent_Cnote()
+   * @return the value of the '<em>Note</em>' containment reference.
+   * @see #setNote(Note)
+   * @see ufscar.compiladores2.musy.MusyPackage#getBodyComponent_Note()
    * @model containment="true"
    * @generated
    */
-  CustomNote getCnote();
+  Note getNote();
 
   /**
-   * Sets the value of the '{@link ufscar.compiladores2.musy.BodyComponent#getCnote <em>Cnote</em>}' containment reference.
+   * Sets the value of the '{@link ufscar.compiladores2.musy.BodyComponent#getNote <em>Note</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Cnote</em>' containment reference.
-   * @see #getCnote()
-   * @generated
-   */
-  void setCnote(CustomNote value);
-
-  /**
-   * Returns the value of the '<em><b>Note</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Note</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Note</em>' attribute.
-   * @see #setNote(String)
-   * @see ufscar.compiladores2.musy.MusyPackage#getBodyComponent_Note()
-   * @model
-   * @generated
-   */
-  String getNote();
-
-  /**
-   * Sets the value of the '{@link ufscar.compiladores2.musy.BodyComponent#getNote <em>Note</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Note</em>' attribute.
+   * @param value the new value of the '<em>Note</em>' containment reference.
    * @see #getNote()
    * @generated
    */
-  void setNote(String value);
+  void setNote(Note value);
 
   /**
    * Returns the value of the '<em><b>Block</b></em>' containment reference.
@@ -104,29 +77,29 @@ public interface BodyComponent extends EObject
   void setBlock(Block value);
 
   /**
-   * Returns the value of the '<em><b>Chord</b></em>' containment reference.
+   * Returns the value of the '<em><b>Ch</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Chord</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Ch</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Chord</em>' containment reference.
-   * @see #setChord(Chord)
-   * @see ufscar.compiladores2.musy.MusyPackage#getBodyComponent_Chord()
-   * @model containment="true"
+   * @return the value of the '<em>Ch</em>' reference.
+   * @see #setCh(DeclaredChord)
+   * @see ufscar.compiladores2.musy.MusyPackage#getBodyComponent_Ch()
+   * @model
    * @generated
    */
-  Chord getChord();
+  DeclaredChord getCh();
 
   /**
-   * Sets the value of the '{@link ufscar.compiladores2.musy.BodyComponent#getChord <em>Chord</em>}' containment reference.
+   * Sets the value of the '{@link ufscar.compiladores2.musy.BodyComponent#getCh <em>Ch</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Chord</em>' containment reference.
-   * @see #getChord()
+   * @param value the new value of the '<em>Ch</em>' reference.
+   * @see #getCh()
    * @generated
    */
-  void setChord(Chord value);
+  void setCh(DeclaredChord value);
 
 } // BodyComponent

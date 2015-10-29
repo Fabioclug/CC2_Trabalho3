@@ -11,16 +11,20 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import ufscar.compiladores2.musy.Block;
 import ufscar.compiladores2.musy.BodyComponent;
-import ufscar.compiladores2.musy.Chord;
 import ufscar.compiladores2.musy.ChordParams;
-import ufscar.compiladores2.musy.CustomNote;
 import ufscar.compiladores2.musy.CustomNoteParam;
+import ufscar.compiladores2.musy.DeclaredChord;
 import ufscar.compiladores2.musy.Midi;
 import ufscar.compiladores2.musy.MidiBody;
-import ufscar.compiladores2.musy.MoreTrackBody;
 import ufscar.compiladores2.musy.MusyFactory;
 import ufscar.compiladores2.musy.MusyPackage;
+import ufscar.compiladores2.musy.Note;
 import ufscar.compiladores2.musy.Parameter;
+import ufscar.compiladores2.musy.ParameterBeat;
+import ufscar.compiladores2.musy.ParameterOctave;
+import ufscar.compiladores2.musy.ParameterTimeNote;
+import ufscar.compiladores2.musy.ParameterTimePause;
+import ufscar.compiladores2.musy.ParameterTimeSignature;
 import ufscar.compiladores2.musy.TimeSignature;
 import ufscar.compiladores2.musy.Track;
 import ufscar.compiladores2.musy.TrackBody;
@@ -59,6 +63,48 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass parameterBeatEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass parameterTimeSignatureEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass parameterTimeNoteEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass parameterTimePauseEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass parameterOctaveEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass declaredChordEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass trackEClass = null;
 
   /**
@@ -67,13 +113,6 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * @generated
    */
   private EClass trackBodyEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass moreTrackBodyEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -101,21 +140,14 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass customNoteEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass chordEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass chordParamsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass noteEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -242,9 +274,19 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getMidiBody_Tracks()
+  public EReference getMidiBody_Chords()
   {
     return (EReference)midiBodyEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getMidiBody_Tracks()
+  {
+    return (EReference)midiBodyEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -262,9 +304,9 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getParameter_Beat()
+  public EClass getParameterBeat()
   {
-    return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
+    return parameterBeatEClass;
   }
 
   /**
@@ -272,9 +314,9 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getParameter_Type()
+  public EAttribute getParameterBeat_Beat()
   {
-    return (EAttribute)parameterEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)parameterBeatEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -282,9 +324,9 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getParameter_Tsig()
+  public EClass getParameterTimeSignature()
   {
-    return (EReference)parameterEClass.getEStructuralFeatures().get(2);
+    return parameterTimeSignatureEClass;
   }
 
   /**
@@ -292,9 +334,9 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getParameter_Tn()
+  public EReference getParameterTimeSignature_Tsig()
   {
-    return (EAttribute)parameterEClass.getEStructuralFeatures().get(3);
+    return (EReference)parameterTimeSignatureEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -302,9 +344,9 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getParameter_Tp()
+  public EClass getParameterTimeNote()
   {
-    return (EAttribute)parameterEClass.getEStructuralFeatures().get(4);
+    return parameterTimeNoteEClass;
   }
 
   /**
@@ -312,9 +354,79 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getParameter_Octave()
+  public EAttribute getParameterTimeNote_Tn()
   {
-    return (EAttribute)parameterEClass.getEStructuralFeatures().get(5);
+    return (EAttribute)parameterTimeNoteEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getParameterTimePause()
+  {
+    return parameterTimePauseEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getParameterTimePause_Tp()
+  {
+    return (EAttribute)parameterTimePauseEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getParameterOctave()
+  {
+    return parameterOctaveEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getParameterOctave_Octave()
+  {
+    return (EAttribute)parameterOctaveEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDeclaredChord()
+  {
+    return declaredChordEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getDeclaredChord_Cp()
+  {
+    return (EReference)declaredChordEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDeclaredChord_Name()
+  {
+    return (EAttribute)declaredChordEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -342,9 +454,19 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getTrack_I()
+  {
+    return (EAttribute)trackEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getTrack_Tbody()
   {
-    return (EReference)trackEClass.getEStructuralFeatures().get(1);
+    return (EReference)trackEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -362,39 +484,9 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTrackBody_Body()
+  public EReference getTrackBody_Bc()
   {
     return (EReference)trackBodyEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTrackBody_More()
-  {
-    return (EReference)trackBodyEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getMoreTrackBody()
-  {
-    return moreTrackBodyEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getMoreTrackBody_Morebody()
-  {
-    return (EReference)moreTrackBodyEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -412,7 +504,7 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getBodyComponent_Cnote()
+  public EReference getBodyComponent_Note()
   {
     return (EReference)bodyComponentEClass.getEStructuralFeatures().get(0);
   }
@@ -422,19 +514,9 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getBodyComponent_Note()
-  {
-    return (EAttribute)bodyComponentEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getBodyComponent_Block()
   {
-    return (EReference)bodyComponentEClass.getEStructuralFeatures().get(2);
+    return (EReference)bodyComponentEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -442,9 +524,9 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getBodyComponent_Chord()
+  public EReference getBodyComponent_Ch()
   {
-    return (EReference)bodyComponentEClass.getEStructuralFeatures().get(3);
+    return (EReference)bodyComponentEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -512,26 +594,6 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getCustomNote()
-  {
-    return customNoteEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getChord()
-  {
-    return chordEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getChordParams()
   {
     return chordParamsEClass;
@@ -542,9 +604,9 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getChordParams_Name()
+  public EReference getChordParams_Cnote()
   {
-    return (EAttribute)chordParamsEClass.getEStructuralFeatures().get(0);
+    return (EReference)chordParamsEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -552,9 +614,39 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getChordParams_Cnotes()
+  public EClass getNote()
   {
-    return (EReference)chordParamsEClass.getEStructuralFeatures().get(1);
+    return noteEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getNote_Nl()
+  {
+    return (EAttribute)noteEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getNote_Acc()
+  {
+    return (EAttribute)noteEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getNote_Cnp()
+  {
+    return (EReference)noteEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -575,6 +667,16 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
   public EAttribute getCustomNoteParam_Octave()
   {
     return (EAttribute)customNoteParamEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getCustomNoteParam_Duration()
+  {
+    return (EAttribute)customNoteParamEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -613,32 +715,42 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
 
     midiBodyEClass = createEClass(MIDI_BODY);
     createEReference(midiBodyEClass, MIDI_BODY__PARAM);
+    createEReference(midiBodyEClass, MIDI_BODY__CHORDS);
     createEReference(midiBodyEClass, MIDI_BODY__TRACKS);
 
     parameterEClass = createEClass(PARAMETER);
-    createEAttribute(parameterEClass, PARAMETER__BEAT);
-    createEAttribute(parameterEClass, PARAMETER__TYPE);
-    createEReference(parameterEClass, PARAMETER__TSIG);
-    createEAttribute(parameterEClass, PARAMETER__TN);
-    createEAttribute(parameterEClass, PARAMETER__TP);
-    createEAttribute(parameterEClass, PARAMETER__OCTAVE);
+
+    parameterBeatEClass = createEClass(PARAMETER_BEAT);
+    createEAttribute(parameterBeatEClass, PARAMETER_BEAT__BEAT);
+
+    parameterTimeSignatureEClass = createEClass(PARAMETER_TIME_SIGNATURE);
+    createEReference(parameterTimeSignatureEClass, PARAMETER_TIME_SIGNATURE__TSIG);
+
+    parameterTimeNoteEClass = createEClass(PARAMETER_TIME_NOTE);
+    createEAttribute(parameterTimeNoteEClass, PARAMETER_TIME_NOTE__TN);
+
+    parameterTimePauseEClass = createEClass(PARAMETER_TIME_PAUSE);
+    createEAttribute(parameterTimePauseEClass, PARAMETER_TIME_PAUSE__TP);
+
+    parameterOctaveEClass = createEClass(PARAMETER_OCTAVE);
+    createEAttribute(parameterOctaveEClass, PARAMETER_OCTAVE__OCTAVE);
+
+    declaredChordEClass = createEClass(DECLARED_CHORD);
+    createEReference(declaredChordEClass, DECLARED_CHORD__CP);
+    createEAttribute(declaredChordEClass, DECLARED_CHORD__NAME);
 
     trackEClass = createEClass(TRACK);
     createEAttribute(trackEClass, TRACK__NAME);
+    createEAttribute(trackEClass, TRACK__I);
     createEReference(trackEClass, TRACK__TBODY);
 
     trackBodyEClass = createEClass(TRACK_BODY);
-    createEReference(trackBodyEClass, TRACK_BODY__BODY);
-    createEReference(trackBodyEClass, TRACK_BODY__MORE);
-
-    moreTrackBodyEClass = createEClass(MORE_TRACK_BODY);
-    createEReference(moreTrackBodyEClass, MORE_TRACK_BODY__MOREBODY);
+    createEReference(trackBodyEClass, TRACK_BODY__BC);
 
     bodyComponentEClass = createEClass(BODY_COMPONENT);
-    createEReference(bodyComponentEClass, BODY_COMPONENT__CNOTE);
-    createEAttribute(bodyComponentEClass, BODY_COMPONENT__NOTE);
+    createEReference(bodyComponentEClass, BODY_COMPONENT__NOTE);
     createEReference(bodyComponentEClass, BODY_COMPONENT__BLOCK);
-    createEReference(bodyComponentEClass, BODY_COMPONENT__CHORD);
+    createEReference(bodyComponentEClass, BODY_COMPONENT__CH);
 
     blockEClass = createEClass(BLOCK);
     createEAttribute(blockEClass, BLOCK__NAME);
@@ -648,16 +760,17 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
     createEAttribute(timeSignatureEClass, TIME_SIGNATURE__QUANTITY);
     createEAttribute(timeSignatureEClass, TIME_SIGNATURE__NOTE);
 
-    customNoteEClass = createEClass(CUSTOM_NOTE);
-
-    chordEClass = createEClass(CHORD);
-
     chordParamsEClass = createEClass(CHORD_PARAMS);
-    createEAttribute(chordParamsEClass, CHORD_PARAMS__NAME);
-    createEReference(chordParamsEClass, CHORD_PARAMS__CNOTES);
+    createEReference(chordParamsEClass, CHORD_PARAMS__CNOTE);
+
+    noteEClass = createEClass(NOTE);
+    createEAttribute(noteEClass, NOTE__NL);
+    createEAttribute(noteEClass, NOTE__ACC);
+    createEReference(noteEClass, NOTE__CNP);
 
     customNoteParamEClass = createEClass(CUSTOM_NOTE_PARAM);
     createEAttribute(customNoteParamEClass, CUSTOM_NOTE_PARAM__OCTAVE);
+    createEAttribute(customNoteParamEClass, CUSTOM_NOTE_PARAM__DURATION);
   }
 
   /**
@@ -689,9 +802,11 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    customNoteEClass.getESuperTypes().add(this.getChordParams());
-    chordParamsEClass.getESuperTypes().add(this.getChord());
-    customNoteParamEClass.getESuperTypes().add(this.getCustomNote());
+    parameterBeatEClass.getESuperTypes().add(this.getParameter());
+    parameterTimeSignatureEClass.getESuperTypes().add(this.getParameter());
+    parameterTimeNoteEClass.getESuperTypes().add(this.getParameter());
+    parameterTimePauseEClass.getESuperTypes().add(this.getParameter());
+    parameterOctaveEClass.getESuperTypes().add(this.getParameter());
 
     // Initialize classes and features; add operations and parameters
     initEClass(midiEClass, Midi.class, "Midi", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -700,32 +815,42 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
 
     initEClass(midiBodyEClass, MidiBody.class, "MidiBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMidiBody_Param(), this.getParameter(), null, "param", null, 0, -1, MidiBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMidiBody_Chords(), this.getDeclaredChord(), null, "chords", null, 0, -1, MidiBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMidiBody_Tracks(), this.getTrack(), null, "tracks", null, 0, -1, MidiBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getParameter_Beat(), ecorePackage.getEInt(), "beat", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getParameter_Type(), ecorePackage.getEString(), "type", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getParameter_Tsig(), this.getTimeSignature(), null, "tsig", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getParameter_Tn(), ecorePackage.getEString(), "tn", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getParameter_Tp(), ecorePackage.getEString(), "tp", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getParameter_Octave(), ecorePackage.getEInt(), "octave", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(parameterBeatEClass, ParameterBeat.class, "ParameterBeat", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getParameterBeat_Beat(), ecorePackage.getEInt(), "beat", null, 0, 1, ParameterBeat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(parameterTimeSignatureEClass, ParameterTimeSignature.class, "ParameterTimeSignature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getParameterTimeSignature_Tsig(), this.getTimeSignature(), null, "tsig", null, 0, 1, ParameterTimeSignature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(parameterTimeNoteEClass, ParameterTimeNote.class, "ParameterTimeNote", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getParameterTimeNote_Tn(), ecorePackage.getEString(), "tn", null, 0, 1, ParameterTimeNote.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(parameterTimePauseEClass, ParameterTimePause.class, "ParameterTimePause", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getParameterTimePause_Tp(), ecorePackage.getEString(), "tp", null, 0, 1, ParameterTimePause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(parameterOctaveEClass, ParameterOctave.class, "ParameterOctave", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getParameterOctave_Octave(), ecorePackage.getEInt(), "octave", null, 0, 1, ParameterOctave.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(declaredChordEClass, DeclaredChord.class, "DeclaredChord", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getDeclaredChord_Cp(), this.getChordParams(), null, "cp", null, 0, 1, DeclaredChord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDeclaredChord_Name(), ecorePackage.getEString(), "name", null, 0, 1, DeclaredChord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(trackEClass, Track.class, "Track", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTrack_Name(), ecorePackage.getEString(), "name", null, 0, 1, Track.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTrack_I(), ecorePackage.getEString(), "i", null, 0, 1, Track.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTrack_Tbody(), this.getTrackBody(), null, "tbody", null, 0, 1, Track.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(trackBodyEClass, TrackBody.class, "TrackBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTrackBody_Body(), this.getBodyComponent(), null, "body", null, 0, 1, TrackBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTrackBody_More(), this.getMoreTrackBody(), null, "more", null, 0, 1, TrackBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(moreTrackBodyEClass, MoreTrackBody.class, "MoreTrackBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMoreTrackBody_Morebody(), this.getBodyComponent(), null, "morebody", null, 0, -1, MoreTrackBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTrackBody_Bc(), this.getBodyComponent(), null, "bc", null, 0, -1, TrackBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(bodyComponentEClass, BodyComponent.class, "BodyComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getBodyComponent_Cnote(), this.getCustomNote(), null, "cnote", null, 0, 1, BodyComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getBodyComponent_Note(), ecorePackage.getEString(), "note", null, 0, 1, BodyComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getBodyComponent_Note(), this.getNote(), null, "note", null, 0, 1, BodyComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getBodyComponent_Block(), this.getBlock(), null, "block", null, 0, 1, BodyComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getBodyComponent_Chord(), this.getChord(), null, "chord", null, 0, 1, BodyComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getBodyComponent_Ch(), this.getDeclaredChord(), null, "ch", null, 0, 1, BodyComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(blockEClass, Block.class, "Block", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getBlock_Name(), ecorePackage.getEString(), "name", null, 0, 1, Block.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -735,16 +860,17 @@ public class MusyPackageImpl extends EPackageImpl implements MusyPackage
     initEAttribute(getTimeSignature_Quantity(), ecorePackage.getEInt(), "quantity", null, 0, 1, TimeSignature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTimeSignature_Note(), ecorePackage.getEInt(), "note", null, 0, 1, TimeSignature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(customNoteEClass, CustomNote.class, "CustomNote", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(chordEClass, Chord.class, "Chord", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
     initEClass(chordParamsEClass, ChordParams.class, "ChordParams", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getChordParams_Name(), ecorePackage.getEString(), "name", null, 0, 1, ChordParams.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getChordParams_Cnotes(), this.getCustomNote(), null, "cnotes", null, 0, -1, ChordParams.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getChordParams_Cnote(), this.getNote(), null, "cnote", null, 0, -1, ChordParams.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(noteEClass, Note.class, "Note", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getNote_Nl(), ecorePackage.getEString(), "nl", null, 0, 1, Note.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getNote_Acc(), ecorePackage.getEString(), "acc", null, 0, 1, Note.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNote_Cnp(), this.getCustomNoteParam(), null, "cnp", null, 0, 1, Note.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(customNoteParamEClass, CustomNoteParam.class, "CustomNoteParam", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getCustomNoteParam_Octave(), ecorePackage.getEInt(), "octave", null, 0, 1, CustomNoteParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getCustomNoteParam_Duration(), ecorePackage.getEString(), "duration", null, 0, 1, CustomNoteParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

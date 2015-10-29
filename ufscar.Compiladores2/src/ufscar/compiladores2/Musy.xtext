@@ -11,35 +11,61 @@ Midi:
 MidiBody: 
 	{MidiBody}
 	param += Parameter*
+	chords += DeclaredChord*
 	tracks += Track*
 ;
 
 Parameter:
-	{Parameter}
-	('BPM' ':' beat = INT) type = "bpm" |
-	('TIME_SIGNATURE' ':' tsig = TimeSignature) type = "time_sig" |
-	('TIME_NOTE' ':' tn = Tn) type = "time_note" |
-	('TIME_PAUSE' ':' tp = Tp) type = "time_pause" |
-	('OCTAVE' ':' octave = INT) type = "octave"
+	ParameterBeat | 
+	ParameterTimeSignature | 
+	ParameterTimeNote | 
+	ParameterTimePause | 
+	ParameterOctave
+;
+	
+	
+ParameterBeat:
+	('BPM' ':' beat = INT)
+;
+		
+ParameterTimeSignature:
+	('TIME_SIGNATURE' ':' tsig = TimeSignature)
+;
+	
+ParameterTimeNote:	
+	('TIME_NOTE' ':' tn = Tn)
+;
+
+ParameterTimePause:	
+	('TIME_PAUSE' ':' tp = Tp)
+;
+
+ParameterOctave:
+	('OCTAVE' ':' octave = INT)
+;
+
+DeclaredChord:
+	'chord' '(' cp=ChordParams ')' name = ID  
 ;
 
 Track:
-	'TRACK' name = ID ':' Instrument '{'
+	'TRACK' name = ID ':' i=Instrument '{'
 		tbody = TrackBody
 	'}'
 ;
 
 TrackBody:
-	body = BodyComponent (more = MoreTrackBody)?
+	bc += BodyComponent (',' bc += BodyComponent)*
 ;
 
-MoreTrackBody:
-	{MoreTrackBody}
-	(',' morebody += BodyComponent)+
-;
+//MoreTrackBody:
+//	{MoreTrackBody}
+//	(',' morebody += BodyComponent)+
+//;
 
 BodyComponent:
-	cnote = CustomNote | note = Note | block = Block | chord = Chord
+	//cnote = CustomNote | 
+	note = Note | block = Block | ch = [DeclaredChord]
 ;
 
 Block:
@@ -60,16 +86,13 @@ Tn:
 	Tp
 ;
 
-CustomNote:
-	Note '(' CustomNoteParam ')'
-;
+//CustomNote:
+//	Note '(' CustomNoteParam ')'
+//;
 
-Chord:
-	'chord' '(' ChordParams ')' name = ID
-;
 
 ChordParams:
-	(Note | CustomNote) (',' (Note | cnotes += CustomNote))*
+	(cnote+=Note) (',' cnote+=Note)*
 ;
 
 NoteLetter: 
@@ -81,7 +104,7 @@ Accident:
 ;
 
 Note: 
-	NoteLetter Accident?
+	nl=NoteLetter acc=Accident? ('(' cnp=CustomNoteParam ')')?
 ;
 
 Instrument:
@@ -89,5 +112,5 @@ Instrument:
 ;
 
 CustomNoteParam:
-	octave = INT ',' Tn | Tn ',' INT | INT | Tn
+	octave = INT ',' duration = Tn | duration = Tn ',' octave = INT | octave = INT | duration = Tn
 ;

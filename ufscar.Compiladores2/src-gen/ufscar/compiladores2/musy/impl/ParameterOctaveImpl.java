@@ -7,26 +7,24 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import ufscar.compiladores2.musy.CustomNoteParam;
 import ufscar.compiladores2.musy.MusyPackage;
+import ufscar.compiladores2.musy.ParameterOctave;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Custom Note Param</b></em>'.
+ * An implementation of the model object '<em><b>Parameter Octave</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ufscar.compiladores2.musy.impl.CustomNoteParamImpl#getOctave <em>Octave</em>}</li>
- *   <li>{@link ufscar.compiladores2.musy.impl.CustomNoteParamImpl#getDuration <em>Duration</em>}</li>
+ *   <li>{@link ufscar.compiladores2.musy.impl.ParameterOctaveImpl#getOctave <em>Octave</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CustomNoteParamImpl extends MinimalEObjectImpl.Container implements CustomNoteParam
+public class ParameterOctaveImpl extends ParameterImpl implements ParameterOctave
 {
   /**
    * The default value of the '{@link #getOctave() <em>Octave</em>}' attribute.
@@ -49,31 +47,11 @@ public class CustomNoteParamImpl extends MinimalEObjectImpl.Container implements
   protected int octave = OCTAVE_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getDuration() <em>Duration</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDuration()
-   * @generated
-   * @ordered
-   */
-  protected static final String DURATION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDuration() <em>Duration</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDuration()
-   * @generated
-   * @ordered
-   */
-  protected String duration = DURATION_EDEFAULT;
-
-  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected CustomNoteParamImpl()
+  protected ParameterOctaveImpl()
   {
     super();
   }
@@ -86,7 +64,7 @@ public class CustomNoteParamImpl extends MinimalEObjectImpl.Container implements
   @Override
   protected EClass eStaticClass()
   {
-    return MusyPackage.Literals.CUSTOM_NOTE_PARAM;
+    return MusyPackage.Literals.PARAMETER_OCTAVE;
   }
 
   /**
@@ -109,30 +87,7 @@ public class CustomNoteParamImpl extends MinimalEObjectImpl.Container implements
     int oldOctave = octave;
     octave = newOctave;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.CUSTOM_NOTE_PARAM__OCTAVE, oldOctave, octave));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getDuration()
-  {
-    return duration;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setDuration(String newDuration)
-  {
-    String oldDuration = duration;
-    duration = newDuration;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.CUSTOM_NOTE_PARAM__DURATION, oldDuration, duration));
+      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.PARAMETER_OCTAVE__OCTAVE, oldOctave, octave));
   }
 
   /**
@@ -145,10 +100,8 @@ public class CustomNoteParamImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case MusyPackage.CUSTOM_NOTE_PARAM__OCTAVE:
+      case MusyPackage.PARAMETER_OCTAVE__OCTAVE:
         return getOctave();
-      case MusyPackage.CUSTOM_NOTE_PARAM__DURATION:
-        return getDuration();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -163,11 +116,8 @@ public class CustomNoteParamImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case MusyPackage.CUSTOM_NOTE_PARAM__OCTAVE:
+      case MusyPackage.PARAMETER_OCTAVE__OCTAVE:
         setOctave((Integer)newValue);
-        return;
-      case MusyPackage.CUSTOM_NOTE_PARAM__DURATION:
-        setDuration((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -183,11 +133,8 @@ public class CustomNoteParamImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case MusyPackage.CUSTOM_NOTE_PARAM__OCTAVE:
+      case MusyPackage.PARAMETER_OCTAVE__OCTAVE:
         setOctave(OCTAVE_EDEFAULT);
-        return;
-      case MusyPackage.CUSTOM_NOTE_PARAM__DURATION:
-        setDuration(DURATION_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -203,10 +150,8 @@ public class CustomNoteParamImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case MusyPackage.CUSTOM_NOTE_PARAM__OCTAVE:
+      case MusyPackage.PARAMETER_OCTAVE__OCTAVE:
         return octave != OCTAVE_EDEFAULT;
-      case MusyPackage.CUSTOM_NOTE_PARAM__DURATION:
-        return DURATION_EDEFAULT == null ? duration != null : !DURATION_EDEFAULT.equals(duration);
     }
     return super.eIsSet(featureID);
   }
@@ -224,10 +169,8 @@ public class CustomNoteParamImpl extends MinimalEObjectImpl.Container implements
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (octave: ");
     result.append(octave);
-    result.append(", duration: ");
-    result.append(duration);
     result.append(')');
     return result.toString();
   }
 
-} //CustomNoteParamImpl
+} //ParameterOctaveImpl

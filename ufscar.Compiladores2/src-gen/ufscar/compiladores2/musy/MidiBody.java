@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link ufscar.compiladores2.musy.MidiBody#getParam <em>Param</em>}</li>
+ *   <li>{@link ufscar.compiladores2.musy.MidiBody#getChords <em>Chords</em>}</li>
  *   <li>{@link ufscar.compiladores2.musy.MidiBody#getTracks <em>Tracks</em>}</li>
  * </ul>
  *
@@ -40,6 +41,22 @@ public interface MidiBody extends EObject
    * @generated
    */
   EList<Parameter> getParam();
+
+  /**
+   * Returns the value of the '<em><b>Chords</b></em>' containment reference list.
+   * The list contents are of type {@link ufscar.compiladores2.musy.DeclaredChord}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Chords</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Chords</em>' containment reference list.
+   * @see ufscar.compiladores2.musy.MusyPackage#getMidiBody_Chords()
+   * @model containment="true"
+   * @generated
+   */
+  EList<DeclaredChord> getChords();
 
   /**
    * Returns the value of the '<em><b>Tracks</b></em>' containment reference list.

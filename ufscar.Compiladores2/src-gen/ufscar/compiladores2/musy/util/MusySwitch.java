@@ -93,6 +93,53 @@ public class MusySwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MusyPackage.PARAMETER_BEAT:
+      {
+        ParameterBeat parameterBeat = (ParameterBeat)theEObject;
+        T result = caseParameterBeat(parameterBeat);
+        if (result == null) result = caseParameter(parameterBeat);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MusyPackage.PARAMETER_TIME_SIGNATURE:
+      {
+        ParameterTimeSignature parameterTimeSignature = (ParameterTimeSignature)theEObject;
+        T result = caseParameterTimeSignature(parameterTimeSignature);
+        if (result == null) result = caseParameter(parameterTimeSignature);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MusyPackage.PARAMETER_TIME_NOTE:
+      {
+        ParameterTimeNote parameterTimeNote = (ParameterTimeNote)theEObject;
+        T result = caseParameterTimeNote(parameterTimeNote);
+        if (result == null) result = caseParameter(parameterTimeNote);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MusyPackage.PARAMETER_TIME_PAUSE:
+      {
+        ParameterTimePause parameterTimePause = (ParameterTimePause)theEObject;
+        T result = caseParameterTimePause(parameterTimePause);
+        if (result == null) result = caseParameter(parameterTimePause);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MusyPackage.PARAMETER_OCTAVE:
+      {
+        ParameterOctave parameterOctave = (ParameterOctave)theEObject;
+        T result = caseParameterOctave(parameterOctave);
+        if (result == null) result = caseParameter(parameterOctave);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MusyPackage.DECLARED_CHORD:
+      {
+        DeclaredChord declaredChord = (DeclaredChord)theEObject;
+        T result = caseDeclaredChord(declaredChord);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MusyPackage.TRACK:
       {
         Track track = (Track)theEObject;
@@ -104,13 +151,6 @@ public class MusySwitch<T> extends Switch<T>
       {
         TrackBody trackBody = (TrackBody)theEObject;
         T result = caseTrackBody(trackBody);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case MusyPackage.MORE_TRACK_BODY:
-      {
-        MoreTrackBody moreTrackBody = (MoreTrackBody)theEObject;
-        T result = caseMoreTrackBody(moreTrackBody);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -135,27 +175,17 @@ public class MusySwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MusyPackage.CUSTOM_NOTE:
-      {
-        CustomNote customNote = (CustomNote)theEObject;
-        T result = caseCustomNote(customNote);
-        if (result == null) result = caseChordParams(customNote);
-        if (result == null) result = caseChord(customNote);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case MusyPackage.CHORD:
-      {
-        Chord chord = (Chord)theEObject;
-        T result = caseChord(chord);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case MusyPackage.CHORD_PARAMS:
       {
         ChordParams chordParams = (ChordParams)theEObject;
         T result = caseChordParams(chordParams);
-        if (result == null) result = caseChord(chordParams);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MusyPackage.NOTE:
+      {
+        Note note = (Note)theEObject;
+        T result = caseNote(note);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -163,9 +193,6 @@ public class MusySwitch<T> extends Switch<T>
       {
         CustomNoteParam customNoteParam = (CustomNoteParam)theEObject;
         T result = caseCustomNoteParam(customNoteParam);
-        if (result == null) result = caseCustomNote(customNoteParam);
-        if (result == null) result = caseChordParams(customNoteParam);
-        if (result == null) result = caseChord(customNoteParam);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -222,6 +249,102 @@ public class MusySwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameter Beat</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameter Beat</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameterBeat(ParameterBeat object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameter Time Signature</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameter Time Signature</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameterTimeSignature(ParameterTimeSignature object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameter Time Note</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameter Time Note</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameterTimeNote(ParameterTimeNote object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameter Time Pause</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameter Time Pause</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameterTimePause(ParameterTimePause object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameter Octave</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameter Octave</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameterOctave(ParameterOctave object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Declared Chord</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Declared Chord</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDeclaredChord(DeclaredChord object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Track</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -249,22 +372,6 @@ public class MusySwitch<T> extends Switch<T>
    * @generated
    */
   public T caseTrackBody(TrackBody object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>More Track Body</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>More Track Body</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseMoreTrackBody(MoreTrackBody object)
   {
     return null;
   }
@@ -318,38 +425,6 @@ public class MusySwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Custom Note</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Custom Note</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseCustomNote(CustomNote object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Chord</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Chord</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseChord(Chord object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Chord Params</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -361,6 +436,22 @@ public class MusySwitch<T> extends Switch<T>
    * @generated
    */
   public T caseChordParams(ChordParams object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Note</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Note</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNote(Note object)
   {
     return null;
   }

@@ -11,83 +11,83 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import ufscar.compiladores2.musy.CustomNoteParam;
 import ufscar.compiladores2.musy.MusyPackage;
-import ufscar.compiladores2.musy.Track;
-import ufscar.compiladores2.musy.TrackBody;
+import ufscar.compiladores2.musy.Note;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Track</b></em>'.
+ * An implementation of the model object '<em><b>Note</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ufscar.compiladores2.musy.impl.TrackImpl#getName <em>Name</em>}</li>
- *   <li>{@link ufscar.compiladores2.musy.impl.TrackImpl#getI <em>I</em>}</li>
- *   <li>{@link ufscar.compiladores2.musy.impl.TrackImpl#getTbody <em>Tbody</em>}</li>
+ *   <li>{@link ufscar.compiladores2.musy.impl.NoteImpl#getNl <em>Nl</em>}</li>
+ *   <li>{@link ufscar.compiladores2.musy.impl.NoteImpl#getAcc <em>Acc</em>}</li>
+ *   <li>{@link ufscar.compiladores2.musy.impl.NoteImpl#getCnp <em>Cnp</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TrackImpl extends MinimalEObjectImpl.Container implements Track
+public class NoteImpl extends MinimalEObjectImpl.Container implements Note
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The default value of the '{@link #getNl() <em>Nl</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getNl()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
+  protected static final String NL_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getNl() <em>Nl</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getNl()
    * @generated
    * @ordered
    */
-  protected String name = NAME_EDEFAULT;
+  protected String nl = NL_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getI() <em>I</em>}' attribute.
+   * The default value of the '{@link #getAcc() <em>Acc</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getI()
+   * @see #getAcc()
    * @generated
    * @ordered
    */
-  protected static final String I_EDEFAULT = null;
+  protected static final String ACC_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getI() <em>I</em>}' attribute.
+   * The cached value of the '{@link #getAcc() <em>Acc</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getI()
+   * @see #getAcc()
    * @generated
    * @ordered
    */
-  protected String i = I_EDEFAULT;
+  protected String acc = ACC_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getTbody() <em>Tbody</em>}' containment reference.
+   * The cached value of the '{@link #getCnp() <em>Cnp</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTbody()
+   * @see #getCnp()
    * @generated
    * @ordered
    */
-  protected TrackBody tbody;
+  protected CustomNoteParam cnp;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TrackImpl()
+  protected NoteImpl()
   {
     super();
   }
@@ -100,7 +100,7 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
   @Override
   protected EClass eStaticClass()
   {
-    return MusyPackage.Literals.TRACK;
+    return MusyPackage.Literals.NOTE;
   }
 
   /**
@@ -108,9 +108,9 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  public String getNl()
   {
-    return name;
+    return nl;
   }
 
   /**
@@ -118,12 +118,12 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  public void setNl(String newNl)
   {
-    String oldName = name;
-    name = newName;
+    String oldNl = nl;
+    nl = newNl;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.TRACK__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.NOTE__NL, oldNl, nl));
   }
 
   /**
@@ -131,9 +131,9 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getI()
+  public String getAcc()
   {
-    return i;
+    return acc;
   }
 
   /**
@@ -141,12 +141,12 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setI(String newI)
+  public void setAcc(String newAcc)
   {
-    String oldI = i;
-    i = newI;
+    String oldAcc = acc;
+    acc = newAcc;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.TRACK__I, oldI, i));
+      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.NOTE__ACC, oldAcc, acc));
   }
 
   /**
@@ -154,9 +154,9 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
    * <!-- end-user-doc -->
    * @generated
    */
-  public TrackBody getTbody()
+  public CustomNoteParam getCnp()
   {
-    return tbody;
+    return cnp;
   }
 
   /**
@@ -164,13 +164,13 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTbody(TrackBody newTbody, NotificationChain msgs)
+  public NotificationChain basicSetCnp(CustomNoteParam newCnp, NotificationChain msgs)
   {
-    TrackBody oldTbody = tbody;
-    tbody = newTbody;
+    CustomNoteParam oldCnp = cnp;
+    cnp = newCnp;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MusyPackage.TRACK__TBODY, oldTbody, newTbody);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MusyPackage.NOTE__CNP, oldCnp, newCnp);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -181,20 +181,20 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTbody(TrackBody newTbody)
+  public void setCnp(CustomNoteParam newCnp)
   {
-    if (newTbody != tbody)
+    if (newCnp != cnp)
     {
       NotificationChain msgs = null;
-      if (tbody != null)
-        msgs = ((InternalEObject)tbody).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MusyPackage.TRACK__TBODY, null, msgs);
-      if (newTbody != null)
-        msgs = ((InternalEObject)newTbody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MusyPackage.TRACK__TBODY, null, msgs);
-      msgs = basicSetTbody(newTbody, msgs);
+      if (cnp != null)
+        msgs = ((InternalEObject)cnp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MusyPackage.NOTE__CNP, null, msgs);
+      if (newCnp != null)
+        msgs = ((InternalEObject)newCnp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MusyPackage.NOTE__CNP, null, msgs);
+      msgs = basicSetCnp(newCnp, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.TRACK__TBODY, newTbody, newTbody));
+      eNotify(new ENotificationImpl(this, Notification.SET, MusyPackage.NOTE__CNP, newCnp, newCnp));
   }
 
   /**
@@ -207,8 +207,8 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
   {
     switch (featureID)
     {
-      case MusyPackage.TRACK__TBODY:
-        return basicSetTbody(null, msgs);
+      case MusyPackage.NOTE__CNP:
+        return basicSetCnp(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -223,12 +223,12 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
   {
     switch (featureID)
     {
-      case MusyPackage.TRACK__NAME:
-        return getName();
-      case MusyPackage.TRACK__I:
-        return getI();
-      case MusyPackage.TRACK__TBODY:
-        return getTbody();
+      case MusyPackage.NOTE__NL:
+        return getNl();
+      case MusyPackage.NOTE__ACC:
+        return getAcc();
+      case MusyPackage.NOTE__CNP:
+        return getCnp();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -243,14 +243,14 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
   {
     switch (featureID)
     {
-      case MusyPackage.TRACK__NAME:
-        setName((String)newValue);
+      case MusyPackage.NOTE__NL:
+        setNl((String)newValue);
         return;
-      case MusyPackage.TRACK__I:
-        setI((String)newValue);
+      case MusyPackage.NOTE__ACC:
+        setAcc((String)newValue);
         return;
-      case MusyPackage.TRACK__TBODY:
-        setTbody((TrackBody)newValue);
+      case MusyPackage.NOTE__CNP:
+        setCnp((CustomNoteParam)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -266,14 +266,14 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
   {
     switch (featureID)
     {
-      case MusyPackage.TRACK__NAME:
-        setName(NAME_EDEFAULT);
+      case MusyPackage.NOTE__NL:
+        setNl(NL_EDEFAULT);
         return;
-      case MusyPackage.TRACK__I:
-        setI(I_EDEFAULT);
+      case MusyPackage.NOTE__ACC:
+        setAcc(ACC_EDEFAULT);
         return;
-      case MusyPackage.TRACK__TBODY:
-        setTbody((TrackBody)null);
+      case MusyPackage.NOTE__CNP:
+        setCnp((CustomNoteParam)null);
         return;
     }
     super.eUnset(featureID);
@@ -289,12 +289,12 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
   {
     switch (featureID)
     {
-      case MusyPackage.TRACK__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MusyPackage.TRACK__I:
-        return I_EDEFAULT == null ? i != null : !I_EDEFAULT.equals(i);
-      case MusyPackage.TRACK__TBODY:
-        return tbody != null;
+      case MusyPackage.NOTE__NL:
+        return NL_EDEFAULT == null ? nl != null : !NL_EDEFAULT.equals(nl);
+      case MusyPackage.NOTE__ACC:
+        return ACC_EDEFAULT == null ? acc != null : !ACC_EDEFAULT.equals(acc);
+      case MusyPackage.NOTE__CNP:
+        return cnp != null;
     }
     return super.eIsSet(featureID);
   }
@@ -310,12 +310,12 @@ public class TrackImpl extends MinimalEObjectImpl.Container implements Track
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(", i: ");
-    result.append(i);
+    result.append(" (nl: ");
+    result.append(nl);
+    result.append(", acc: ");
+    result.append(acc);
     result.append(')');
     return result.toString();
   }
 
-} //TrackImpl
+} //NoteImpl

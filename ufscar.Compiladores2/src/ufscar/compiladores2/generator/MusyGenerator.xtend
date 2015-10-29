@@ -4,9 +4,9 @@
 package ufscar.compiladores2.generator
 
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess
-import ufscar.compiladores2.musy.Parameter
+import org.eclipse.xtext.generator.IGenerator
+import ufscar.compiladores2.musy.Midi
 
 /**
  * Generates code from your model files on save.
@@ -16,12 +16,25 @@ import ufscar.compiladores2.musy.Parameter
 class MusyGenerator implements IGenerator {
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(typeof(Greeting))
-//				.map[name]
-//				.join(', '))
+		fsa.generateFile('greetings.txt', 'Notas: ' + 
+			resource.allContents
+				.filter(typeof(Midi)).toList.get(0).compile)
 	}
+	
+	def compile(Midi m) '''
+	Musica gerada: «m.name». 
+	
+	«m.body.tracks.get(0).name»
+	
+	«FOR bodyComponent:m.body.tracks.get(0).tbody.bc»
+	«IF bodyComponent.note != null»
+	Nota: «bodyComponent.note.nl»
+	«ENDIF»
+	«IF bodyComponent.ch != null»
+	Acorde: «bodyComponent.ch.name»
+	«ENDIF»
+	«ENDFOR»
+	'''
 	
 //	def compile(Parameter p) '''
 //	«IF p.beat < 1 || p.beat > 500»

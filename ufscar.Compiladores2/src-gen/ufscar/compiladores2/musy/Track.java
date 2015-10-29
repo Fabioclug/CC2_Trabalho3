@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link ufscar.compiladores2.musy.Track#getName <em>Name</em>}</li>
+ *   <li>{@link ufscar.compiladores2.musy.Track#getI <em>I</em>}</li>
  *   <li>{@link ufscar.compiladores2.musy.Track#getTbody <em>Tbody</em>}</li>
  * </ul>
  *
@@ -48,6 +49,32 @@ public interface Track extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>I</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>I</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>I</em>' attribute.
+   * @see #setI(String)
+   * @see ufscar.compiladores2.musy.MusyPackage#getTrack_I()
+   * @model
+   * @generated
+   */
+  String getI();
+
+  /**
+   * Sets the value of the '{@link ufscar.compiladores2.musy.Track#getI <em>I</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>I</em>' attribute.
+   * @see #getI()
+   * @generated
+   */
+  void setI(String value);
 
   /**
    * Returns the value of the '<em><b>Tbody</b></em>' containment reference.

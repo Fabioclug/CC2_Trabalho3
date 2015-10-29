@@ -67,15 +67,19 @@ public class MusyFactoryImpl extends EFactoryImpl implements MusyFactory
       case MusyPackage.MIDI: return createMidi();
       case MusyPackage.MIDI_BODY: return createMidiBody();
       case MusyPackage.PARAMETER: return createParameter();
+      case MusyPackage.PARAMETER_BEAT: return createParameterBeat();
+      case MusyPackage.PARAMETER_TIME_SIGNATURE: return createParameterTimeSignature();
+      case MusyPackage.PARAMETER_TIME_NOTE: return createParameterTimeNote();
+      case MusyPackage.PARAMETER_TIME_PAUSE: return createParameterTimePause();
+      case MusyPackage.PARAMETER_OCTAVE: return createParameterOctave();
+      case MusyPackage.DECLARED_CHORD: return createDeclaredChord();
       case MusyPackage.TRACK: return createTrack();
       case MusyPackage.TRACK_BODY: return createTrackBody();
-      case MusyPackage.MORE_TRACK_BODY: return createMoreTrackBody();
       case MusyPackage.BODY_COMPONENT: return createBodyComponent();
       case MusyPackage.BLOCK: return createBlock();
       case MusyPackage.TIME_SIGNATURE: return createTimeSignature();
-      case MusyPackage.CUSTOM_NOTE: return createCustomNote();
-      case MusyPackage.CHORD: return createChord();
       case MusyPackage.CHORD_PARAMS: return createChordParams();
+      case MusyPackage.NOTE: return createNote();
       case MusyPackage.CUSTOM_NOTE_PARAM: return createCustomNoteParam();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -120,6 +124,72 @@ public class MusyFactoryImpl extends EFactoryImpl implements MusyFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public ParameterBeat createParameterBeat()
+  {
+    ParameterBeatImpl parameterBeat = new ParameterBeatImpl();
+    return parameterBeat;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ParameterTimeSignature createParameterTimeSignature()
+  {
+    ParameterTimeSignatureImpl parameterTimeSignature = new ParameterTimeSignatureImpl();
+    return parameterTimeSignature;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ParameterTimeNote createParameterTimeNote()
+  {
+    ParameterTimeNoteImpl parameterTimeNote = new ParameterTimeNoteImpl();
+    return parameterTimeNote;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ParameterTimePause createParameterTimePause()
+  {
+    ParameterTimePauseImpl parameterTimePause = new ParameterTimePauseImpl();
+    return parameterTimePause;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ParameterOctave createParameterOctave()
+  {
+    ParameterOctaveImpl parameterOctave = new ParameterOctaveImpl();
+    return parameterOctave;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DeclaredChord createDeclaredChord()
+  {
+    DeclaredChordImpl declaredChord = new DeclaredChordImpl();
+    return declaredChord;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Track createTrack()
   {
     TrackImpl track = new TrackImpl();
@@ -135,17 +205,6 @@ public class MusyFactoryImpl extends EFactoryImpl implements MusyFactory
   {
     TrackBodyImpl trackBody = new TrackBodyImpl();
     return trackBody;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public MoreTrackBody createMoreTrackBody()
-  {
-    MoreTrackBodyImpl moreTrackBody = new MoreTrackBodyImpl();
-    return moreTrackBody;
   }
 
   /**
@@ -186,32 +245,21 @@ public class MusyFactoryImpl extends EFactoryImpl implements MusyFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public CustomNote createCustomNote()
-  {
-    CustomNoteImpl customNote = new CustomNoteImpl();
-    return customNote;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Chord createChord()
-  {
-    ChordImpl chord = new ChordImpl();
-    return chord;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public ChordParams createChordParams()
   {
     ChordParamsImpl chordParams = new ChordParamsImpl();
     return chordParams;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Note createNote()
+  {
+    NoteImpl note = new NoteImpl();
+    return note;
   }
 
   /**
