@@ -16,6 +16,7 @@ MidiBody:
 ;
 
 Parameter:
+<<<<<<< HEAD
 	ParameterBeat | 
 	ParameterTimeSignature | 
 	ParameterTimeNote | 
@@ -90,6 +91,9 @@ Tn:
 //	Note '(' CustomNoteParam ')'
 //;
 
+Interval:
+	'I' '(' INT ')'	
+;
 
 ChordParams:
 	(cnote+=Note) (',' cnote+=Note)*
