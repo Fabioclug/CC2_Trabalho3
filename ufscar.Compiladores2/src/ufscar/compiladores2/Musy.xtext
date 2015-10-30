@@ -45,7 +45,7 @@ ParameterOctave:
 ;
 
 DeclaredChord:
-	'chord' '(' cp=ChordParams ')' name = ID  
+	'chord' '(' cp=ChordParams ')' ':' name = ID  
 ;
 
 Track:
@@ -65,7 +65,7 @@ TrackBody:
 
 BodyComponent:
 	//cnote = CustomNote | 
-	note = Note | block = Block | ch = [DeclaredChord]
+	note = Note | block = Block | ch = [DeclaredChord] | interval = Interval
 ;
 
 Block:
@@ -75,7 +75,7 @@ Block:
 ;
 
 TimeSignature:
-	quantity= INT '/' note = INT
+	quantity = INT '/' note = INT
 ;
 
 Tp:
@@ -89,7 +89,6 @@ Tn:
 //CustomNote:
 //	Note '(' CustomNoteParam ')'
 //;
-
 
 ChordParams:
 	(cnote+=Note) (',' cnote+=Note)*
@@ -105,6 +104,10 @@ Accident:
 
 Note: 
 	nl=NoteLetter acc=Accident? ('(' cnp=CustomNoteParam ')')?
+;
+
+Interval:
+	'I' '(' tempo = Tp ')'	
 ;
 
 Instrument:
