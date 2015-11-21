@@ -11,6 +11,8 @@ import ufscar.compiladores2.musy.ParameterTimeNote
 import ufscar.compiladores2.musy.ParameterTimeSignature
 import java.util.regex.Pattern
 import java.util.regex.Matcher
+import ufscar.compiladores2.musy.TimeSignature
+import ufscar.compiladores2.musy.Note
 
 /**
  * This class contains custom validation rules. 
@@ -18,19 +20,6 @@ import java.util.regex.Matcher
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class MusyValidator extends AbstractMusyValidator {
-
-//  public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					MyDslPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
-	
-	public String test
 	
 	@Check
 	def void checkBPM(ParameterBeat pb) {
@@ -42,6 +31,19 @@ class MusyValidator extends AbstractMusyValidator {
 	def void checkOctave(ParameterOctave po) {
 		if(po.octave  < 0 || po.octave > 7)
 			error("Octave must be between 1 and 8", null);
+	}
+	
+	@Check
+	def void check(TimeSignature ts) {
+		if(ts.note != 1 && ts.note != 2 && ts.note != 4 && ts.note != 8 && ts.note != 16 && ts.note != 32)
+			error("Beat must be one of: {1,2,4,8,16,32}", null);
+	}
+	
+	@Check
+	def void check(Note n) {
+		if(n.acc != null && n.acc.equals("#"))
+			if(n.nl.equals("B") || n.nl.equals("E"))
+				error("B and E can't have this kind of accident", null);
 	}
 	
 //

@@ -10,17 +10,17 @@ Midi:
 
 MidiBody: 
 	{MidiBody}
-	param += Parameter*
+	params += Parameter*
 	chords += DeclaredChord*
 	tracks += Track*
 ;
 
 Parameter:
-	ParameterBeat | 
-	ParameterTimeSignature | 
-	ParameterTimeNote | 
-	ParameterTimePause | 
-	ParameterOctave
+	pb = ParameterBeat | 
+	pts = ParameterTimeSignature | 
+	ptn = ParameterTimeNote | 
+	ptp = ParameterTimePause | 
+	po = ParameterOctave
 ;
 	
 	
@@ -45,7 +45,7 @@ ParameterOctave:
 ;
 
 DeclaredChord:
-	'chord' '(' cp=ChordParams ')' ':' name = ID  
+	'chord' '(' cp=ChordParams ')' name = ID  
 ;
 
 Track:
@@ -58,24 +58,18 @@ TrackBody:
 	bc += BodyComponent (',' bc += BodyComponent)*
 ;
 
-//MoreTrackBody:
-//	{MoreTrackBody}
-//	(',' morebody += BodyComponent)+
-//;
-
 BodyComponent:
-	//cnote = CustomNote | 
 	note = Note | block = Block | ch = [DeclaredChord] | interval = Interval
 ;
 
 Block:
 	'BLOCK' name = ID '{'
-		(blockbody += TrackBody)*
+		blockbody = TrackBody
 	'}'
 ;
 
 TimeSignature:
-	quantity = INT '/' note = INT
+	quantity= INT '/' note = INT
 ;
 
 Tp:
@@ -90,8 +84,13 @@ Tn:
 //	Note '(' CustomNoteParam ')'
 //;
 
+
 ChordParams:
 	(cnote+=Note) (',' cnote+=Note)*
+;
+
+NoteDotting:
+	'.' | '..' | '...'
 ;
 
 NoteLetter: 
@@ -105,15 +104,15 @@ Accident:
 Note: 
 	nl=NoteLetter acc=Accident? ('(' cnp=CustomNoteParam ')')?
 ;
-
 Interval:
 	'I' '(' tempo = Tp ')'	
 ;
 
 Instrument:
-	'PIANO' | 'GUITAR' | 'ELETRIC GUITAR' | 'BASS' | 'SAX' | 'VIOLIN' | 'DRUMS'
+	'PIANO' | 'GUITAR' | 'ELECTRIC GUITAR' | 'BASS' | 'SAX' | 'VIOLIN' | 'DRUMS' | 'STRINGS'
 ;
 
 CustomNoteParam:
-	octave = INT ',' duration = Tn | duration = Tn ',' octave = INT | octave = INT | duration = Tn
+	octave = INT ',' duration = Tn dots = NoteDotting? | duration = Tn dots = NoteDotting? ',' octave = INT |
+	octave = INT | duration = Tn dots = NoteDotting?
 ;

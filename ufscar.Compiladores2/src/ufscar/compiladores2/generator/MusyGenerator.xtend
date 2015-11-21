@@ -7,6 +7,14 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import ufscar.compiladores2.musy.Midi
+import ufscar.compiladores2.musy.TrackBody
+//import ufscar.compiladores2.musy.Instrument
+import ufscar.compiladores2.musy.Track
+import ufscar.compiladores2.musy.TimeSignature
+import ufscar.compiladores2.musy.Parameter
+import ufscar.compiladores2.musy.Note
+import ufscar.compiladores2.musy.Block
+import ufscar.compiladores2.musy.DeclaredChord
 
 /**
  * Generates code from your model files on save.
@@ -15,30 +23,195 @@ import ufscar.compiladores2.musy.Midi
  */
 class MusyGenerator implements IGenerator {
 	
+	int BPM;
+	int sigNumerator;
+	int sigDenominator;
+	int timePause;
+	double timeNote;
+	int octave;
+	
+	
+	//Add parameter variables, change them during compile
+	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-		fsa.generateFile('greetings.txt', 'Notas: ' + 
+		fsa.generateFile(resource.allContents.filter(typeof(Midi)).toList.get(0).name.toLowerCase +'.py', 
 			resource.allContents
 				.filter(typeof(Midi)).toList.get(0).compile)
 	}
 	
+//	def getOctave(Midi m) {
+//		for(Parameter p : m.body.params.toList) {
+//			if(p.po != null) {
+//				return p.po.octave;
+//			}
+//		}
+//	}
+	
+	def getInitInfo(Midi m) {
+		for(Parameter p : m.body.params.toList) {
+			if(p.po != null) {
+				octave = p.po.octave;
+			}
+			else if(p.pb != null) {
+				BPM = p.pb.beat;
+			}
+			else if(p.pts != null) {
+				sigNumerator = p.pts.tsig.quantity;
+				sigDenominator = p.pts.tsig.note;
+			}
+			else if(p.ptn != null) {
+				timeNote = timeMap(p.ptn.tn);
+			}
+			else if(p.ptp != null) {
+				timePause = 2;
+			}
+			
+		}
+	}
+	
+	def timeMap(String s) {
+		if(s.equals("sb")) {
+			return 4;
+		}
+		else if(s.equals("m")) {
+			return 2;
+		}
+		else if(s.equals("sm")) {
+			return 1;
+		}
+		else if(s.equals("cl")) {
+			return 0.5;
+		}
+		else if(s.equals("sc")) {
+			return 0.25;
+		}
+		else if(s.equals("f")) {
+			return 0.125;
+		}
+		else if(s.equals("sf")) {
+			return 0.0625;
+		}
+	}
+	
+	def getNInstrument(Track t) {
+		if(t.i.equals("PIANO")) {
+			return 1;
+		}
+		else if(t.i.equals("GUITAR")) {
+			return 25;
+		}
+		else if(t.i.equals("ELECTRIC GUITAR")) {
+			return 31;
+		}
+		else if(t.i.equals("BASS")) {
+			return 34;
+		}
+		else if(t.i.equals("SAX")) {
+			return 65;
+		}
+		else if(t.i.equals("VIOLIN")) {
+			return 41;
+		}
+		else if(t.i.equals("DRUMS")) {
+			return 15;
+		}
+		else if(t.i.equals("STRINGS")) {
+			return 51;
+		}
+	}
+	
+	def getTimeNote(Note n) {
+		if(n.cnp != null && n.cnp.duration != null) {
+			return timeMap(n.cnp.duration);
+		}
+		else return timeNote;
+	}
+	
+	def getNoteName(Note n) {
+		if(n.acc != null) {
+			if(n.acc.equals("#")) {
+				return n.nl + "s";
+			}
+			else {
+				switch n.nl {
+					case "C": "B"
+					case "D": "Cs"
+					case "E": "Ds"
+					case "F": "E"
+					case "G": "Fs"
+					case "A": "Gs"
+					case "B": "As"
+				}
+			}
+		}
+		else return n.nl;
+	}
+	
+	def getNoteOctave(Note n) {
+		// && n.ncp.octave is defined
+		if(n.cnp != null) {
+			return n.cnp.octave;
+		}
+		else return this.octave;
+	}
+	
 	def compile(Midi m) '''
-	Musica gerada: «m.name». 
+	«getInitInfo(m)»
+	import midi
 	
-	«m.body.tracks.get(0).name»
+	«m.name»_MIDI = midi.Pattern(
+		tracks=[
+	«FOR track:m.body.tracks.toList SEPARATOR ','»
+		«track.compile»
+	«ENDFOR»
+		]
+	) 
 	
-	«FOR bodyComponent:m.body.tracks.get(0).tbody.bc»
-	«IF bodyComponent.note != null»
-	Nota: «bodyComponent.note.nl»
-	«ENDIF»
-	«IF bodyComponent.ch != null»
-	Acorde: «bodyComponent.ch.name»
-	«ENDIF»
+	midi.write_midifile("«m.name.toLowerCase».mid", «m.name»_MIDI)
+	'''
+	
+	def compile(Track t) '''
+	[ midi.TimeSignatureEvent(tick=0, data=[«sigNumerator», «(Math.log(sigDenominator) / Math.log(2)) as int», 24, 8]),
+	midi.KeySignatureEvent(tick=0, data=[0, 0]),
+	midi.SetTempoEvent(tick=0, bpm=«this.BPM»),
+	midi.EndOfTrackEvent(tick=1, data=[])
+	],
+	[ midi.ControlChangeEvent(tick=0, channel=0, data=[91, 58]),
+	midi.ControlChangeEvent(tick=0, channel=0, data=[10, 69]),
+	midi.ControlChangeEvent(tick=0, channel=0, data=[0, 0]),
+	midi.ControlChangeEvent(tick=0, channel=0, data=[32, 0]),
+	midi.ProgramChangeEvent(tick=0, channel=0, data=[«t.getNInstrument»]),
+	«t.tbody.compile»
+	]
+	'''
+	
+	def compile(TrackBody tb) '''
+	«FOR bComponent:tb.bc.toList SEPARATOR ','»
+		«IF bComponent.note != null»
+			«bComponent.note.compile»
+		«ELSEIF bComponent.block != null»
+			«bComponent.block.compile»
+		«ELSEIF bComponent.ch != null»
+			«bComponent.ch.compile»
+		«ENDIF»
 	«ENDFOR»
 	'''
 	
-//	def compile(Parameter p) '''
-//	«IF p.beat < 1 || p.beat > 500»
-//		«p.beat = 120»
-//	«ENDIF»
-//	'''
+	def compile(Note n) '''
+		midi.NoteOnEvent(tick=0, velocity=72, pitch=midi.«n.noteName»_«n.noteOctave»),
+		midi.NoteOffEvent(tick=«220 * n.timeNote»220, pitch=«n.noteName»_«n.noteOctave»)
+	'''
+	
+	def compile(Block b)'''
+	«b.blockbody.compile»
+	'''
+	
+	def compile(DeclaredChord dc) '''
+	«FOR chordNote:dc.cp.cnote.toList»
+		midi.NoteOnEvent(tick=0, velocity=72, pitch=midi.«chordNote.noteName»_«chordNote.noteOctave»),
+	«ENDFOR»
+	«FOR chordNote:dc.cp.cnote.toList SEPARATOR ','»
+		midi.NoteOnEvent(tick=«220 * chordNote.timeNote», velocity=72, pitch=midi.«chordNote.noteName»_«chordNote.noteOctave»),
+	«ENDFOR»
+	'''
 }
