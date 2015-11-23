@@ -8,13 +8,16 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import ufscar.compiladores2.musy.Midi
 import ufscar.compiladores2.musy.TrackBody
-//import ufscar.compiladores2.musy.Instrument
 import ufscar.compiladores2.musy.Track
 import ufscar.compiladores2.musy.TimeSignature
 import ufscar.compiladores2.musy.Parameter
 import ufscar.compiladores2.musy.Note
 import ufscar.compiladores2.musy.Block
 import ufscar.compiladores2.musy.DeclaredChord
+import ufscar.compiladores2.musy.Interval
+import ufscar.compiladores2.musy.Triplet
+
+//TODO: consertar o octave quando o parametro nao é passado
 
 /**
  * Generates code from your model files on save.
@@ -26,9 +29,10 @@ class MusyGenerator implements IGenerator {
 	int BPM;
 	int sigNumerator;
 	int sigDenominator;
-	int timePause;
+	double timePause;
 	double timeNote;
 	int octave;
+	double relativeTick = 0.0;
 	
 	
 	//Add parameter variables, change them during compile
@@ -38,14 +42,6 @@ class MusyGenerator implements IGenerator {
 			resource.allContents
 				.filter(typeof(Midi)).toList.get(0).compile)
 	}
-	
-//	def getOctave(Midi m) {
-//		for(Parameter p : m.body.params.toList) {
-//			if(p.po != null) {
-//				return p.po.octave;
-//			}
-//		}
-//	}
 	
 	def getInitInfo(Midi m) {
 		for(Parameter p : m.body.params.toList) {
@@ -63,7 +59,7 @@ class MusyGenerator implements IGenerator {
 				timeNote = timeMap(p.ptn.tn);
 			}
 			else if(p.ptp != null) {
-				timePause = 2;
+				timePause = timeMap(p.ptp.tp);
 			}
 			
 		}
@@ -90,6 +86,18 @@ class MusyGenerator implements IGenerator {
 		}
 		else if(s.equals("sf")) {
 			return 0.0625;
+		}
+	}
+	
+	def dotMap(String s) {
+		if(s.equals(".")) {
+			return 1.5;
+		}
+		else if(s. equals("..")) {
+			return 1.75;
+		}
+		else if(s.equals("...")) {
+			return 1.875;
 		}
 	}
 	
@@ -122,6 +130,9 @@ class MusyGenerator implements IGenerator {
 	
 	def getTimeNote(Note n) {
 		if(n.cnp != null && n.cnp.duration != null) {
+			if(n.cnp.dots != null) {
+				return dotMap(n.cnp.dots) * timeMap(n.cnp.duration);
+			}
 			return timeMap(n.cnp.duration);
 		}
 		else return timeNote;
@@ -155,6 +166,23 @@ class MusyGenerator implements IGenerator {
 		else return this.octave;
 	}
 	
+	def getStartTick() {
+		var double relative = relativeTick.doubleValue;
+		relativeTick = 0.0;
+		return relative;
+	}
+	
+	def calculateEndTick(Note n) {
+		return 220 * getTimeNote(n);
+	}
+	
+	def void putPause(Interval i) {
+		if(i.tempo != null) {
+			relativeTick = (relativeTick + 220 * timeMap(i.tempo));
+		}
+		else relativeTick = (relativeTick + 220 * timePause);	
+	}
+	
 	def compile(Midi m) '''
 	«getInitInfo(m)»
 	import midi
@@ -171,35 +199,72 @@ class MusyGenerator implements IGenerator {
 	'''
 	
 	def compile(Track t) '''
-	[ midi.TimeSignatureEvent(tick=0, data=[«sigNumerator», «(Math.log(sigDenominator) / Math.log(2)) as int», 24, 8]),
-	midi.KeySignatureEvent(tick=0, data=[0, 0]),
-	midi.SetTempoEvent(tick=0, bpm=«this.BPM»),
-	midi.EndOfTrackEvent(tick=1, data=[])
-	],
-	[ midi.ControlChangeEvent(tick=0, channel=0, data=[91, 58]),
-	midi.ControlChangeEvent(tick=0, channel=0, data=[10, 69]),
-	midi.ControlChangeEvent(tick=0, channel=0, data=[0, 0]),
-	midi.ControlChangeEvent(tick=0, channel=0, data=[32, 0]),
-	midi.ProgramChangeEvent(tick=0, channel=0, data=[«t.getNInstrument»]),
-	«t.tbody.compile»
-	]
+		[	midi.TimeSignatureEvent(tick=0, data=[«sigNumerator», «(Math.log(sigDenominator) / Math.log(2)) as int», 24, 8]),
+			midi.KeySignatureEvent(tick=0, data=[0, 0]),
+			midi.SetTempoEvent(tick=0, bpm=«this.BPM»),
+			midi.EndOfTrackEvent(tick=1, data=[])],
+		[ midi.ControlChangeEvent(tick=0, channel=0, data=[91, 58]),
+			midi.ControlChangeEvent(tick=0, channel=0, data=[10, 69]),
+			midi.ControlChangeEvent(tick=0, channel=0, data=[0, 0]),
+			midi.ControlChangeEvent(tick=0, channel=0, data=[32, 0]),
+			midi.ProgramChangeEvent(tick=0, channel=0, data=[«t.getNInstrument»]),
+			«t.tbody.compile»
+		]
 	'''
 	
-	def compile(TrackBody tb) '''
-	«FOR bComponent:tb.bc.toList SEPARATOR ','»
-		«IF bComponent.note != null»
-			«bComponent.note.compile»
-		«ELSEIF bComponent.block != null»
-			«bComponent.block.compile»
-		«ELSEIF bComponent.ch != null»
-			«bComponent.ch.compile»
-		«ENDIF»
-	«ENDFOR»
-	'''
+	def String compile(TrackBody tb) {
+		var String retorno = "";
+		var int len = tb.bc.toList.size;
+		var int i = 0;
+		for(bComponent : tb.bc.toList) {
+			if(bComponent.note != null) {
+				retorno += bComponent.note.compile;
+			}
+			else if(bComponent.block != null) {
+				retorno += bComponent.block.compile;
+			}
+			else if(bComponent.dc != null) {
+				retorno += bComponent.dc.compile;
+			}
+			else if(bComponent.interval != null) {
+				bComponent.interval.putPause;
+			}
+			else if(bComponent.trip != null) {
+				retorno += bComponent.trip.compile;
+			}
+			else if(bComponent.blckRef != null) {
+				retorno += bComponent.blckRef.compile;
+			}
+			i += 1;
+			if(i < len && bComponent.interval == null) {
+				retorno += ","
+			}
+		}
+		return retorno;
+	}
+	
+	//intervalo nao pode separar por virgula
+//	def compile(TrackBody tb) '''
+//	«FOR bComponent:tb.bc.toList SEPARATOR ','»
+//		«IF bComponent.note != null»
+//			«bComponent.note.compile»
+//		«ELSEIF bComponent.block != null»
+//			«bComponent.block.compile»
+//		«ELSEIF bComponent.dc != null»
+//			«bComponent.dc.compile»
+//		«ELSEIF bComponent.interval != null»
+//			«bComponent.interval.putPause»
+//		«ELSEIF bComponent.trip != null»
+//			«bComponent.trip.compile»
+//		«ELSEIF bComponent.blckRef != null»
+//			«bComponent.blckRef.compile»
+//		«ENDIF»
+//	«ENDFOR»
+//	'''
 	
 	def compile(Note n) '''
-		midi.NoteOnEvent(tick=0, velocity=72, pitch=midi.«n.noteName»_«n.noteOctave»),
-		midi.NoteOffEvent(tick=«220 * n.timeNote»220, pitch=«n.noteName»_«n.noteOctave»)
+		midi.NoteOnEvent(tick=«getStartTick as int», velocity=80, pitch=midi.«n.noteName»_«n.noteOctave»),
+		midi.NoteOffEvent(tick=«n.calculateEndTick as int», pitch=midi.«n.noteName»_«n.noteOctave»)
 	'''
 	
 	def compile(Block b)'''
@@ -208,10 +273,20 @@ class MusyGenerator implements IGenerator {
 	
 	def compile(DeclaredChord dc) '''
 	«FOR chordNote:dc.cp.cnote.toList»
-		midi.NoteOnEvent(tick=0, velocity=72, pitch=midi.«chordNote.noteName»_«chordNote.noteOctave»),
+		midi.NoteOnEvent(tick=«getStartTick as int», velocity=80, pitch=midi.«chordNote.noteName»_«chordNote.noteOctave»),
 	«ENDFOR»
-	«FOR chordNote:dc.cp.cnote.toList SEPARATOR ','»
-		midi.NoteOnEvent(tick=«220 * chordNote.timeNote», velocity=72, pitch=midi.«chordNote.noteName»_«chordNote.noteOctave»),
+	midi.NoteOffEvent(tick=«dc.cp.cnote.toList.get(0).calculateEndTick as int», pitch=midi.«dc.cp.cnote.toList.get(0).noteName»_«dc.cp.cnote.toList.get(0).noteOctave»),
+	«FOR i: 1..dc.cp.cnote.toList.size - 1 SEPARATOR ','»
+		midi.NoteOffEvent(tick=0, pitch=midi.«dc.cp.cnote.toList.get(i).noteName»_«dc.cp.cnote.toList.get(i).noteOctave»)
 	«ENDFOR»
+	'''
+	
+	def compile(Triplet t) '''
+		midi.NoteOnEvent(tick=«getStartTick as int», velocity=80, pitch=midi.«t.n1.noteName»_«t.n1.noteOctave»),
+		midi.NoteOffEvent(tick=«((t.n1.calculateEndTick * 2) / 3) as int», pitch=midi.«t.n1.noteName»_«t.n1.noteOctave»),
+		midi.NoteOnEvent(tick=«getStartTick as int», velocity=80, pitch=midi.«t.n2.noteName»_«t.n2.noteOctave»),
+		midi.NoteOffEvent(tick=«((t.n2.calculateEndTick * 2) / 3) as int», pitch=midi.«t.n2.noteName»_«t.n2.noteOctave»),
+		midi.NoteOnEvent(tick=«getStartTick as int», velocity=80, pitch=midi.«t.n3.noteName»_«t.n3.noteOctave»),
+		midi.NoteOffEvent(tick=«((t.n3.calculateEndTick * 2) / 3) as int», pitch=midi.«t.n3.noteName»_«t.n3.noteOctave»)
 	'''
 }

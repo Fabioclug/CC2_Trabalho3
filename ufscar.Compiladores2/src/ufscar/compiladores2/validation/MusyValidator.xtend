@@ -13,6 +13,7 @@ import java.util.regex.Pattern
 import java.util.regex.Matcher
 import ufscar.compiladores2.musy.TimeSignature
 import ufscar.compiladores2.musy.Note
+import ufscar.compiladores2.musy.DeclaredChord
 
 /**
  * This class contains custom validation rules. 
@@ -45,6 +46,12 @@ class MusyValidator extends AbstractMusyValidator {
 			if(n.nl.equals("B") || n.nl.equals("E"))
 				error("B and E can't have this kind of accident", null);
 	}
+	
+	@Check
+	def void check(DeclaredChord dc) {
+		if(dc.cp.cnote.toList.size < 2)
+			error("A chord must have at least two notes", null);
+	}	
 	
 //
 //	@Check

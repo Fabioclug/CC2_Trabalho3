@@ -59,7 +59,11 @@ TrackBody:
 ;
 
 BodyComponent:
-	note = Note | block = Block | ch = [DeclaredChord] | interval = Interval
+	note = Note | block = Block | dc = [DeclaredChord] | interval = Interval | trip = Triplet | 'block' blckRef = [Block]
+;
+
+NamedElement:
+	DeclaredChord | Block
 ;
 
 Block:
@@ -67,6 +71,10 @@ Block:
 		blockbody = TrackBody
 	'}'
 ;
+
+//BlockReference:
+//	bl = [Block]
+//;
 
 TimeSignature:
 	quantity= INT '/' note = INT
@@ -104,8 +112,14 @@ Accident:
 Note: 
 	nl=NoteLetter acc=Accident? ('(' cnp=CustomNoteParam ')')?
 ;
+
 Interval:
-	'I' '(' tempo = Tp ')'	
+	{Interval}
+	'I' ('(' tempo = Tp ')')?
+;
+
+Triplet:
+	'triplet' '(' n1 = Note ',' n2 = Note ',' n3 = Note ')'
 ;
 
 Instrument:
