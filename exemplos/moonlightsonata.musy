@@ -1,0 +1,45 @@
+MIDI MoonlightSonata {
+    BPM: 190
+    TIME_SIGNATURE: 4/4
+    TIME_NOTE: sc
+    TIME_PAUSE: sc
+    OCTAVE: 4
+
+    chord(G#(6, cl), E(6, cl), C#(6, cl), G#(5, cl)) chord1
+    chord(G#(6, cl), D#(6, cl), C(6, cl), G#(5, cl)) chord2
+    chord(C#(7, cl), G#(6, cl), F(6, cl), C#(6, cl)) chord3
+    chord(C#(7, cl), F#(6, cl), C#(6, cl)) chord4
+    chord(C#(7, cl), G(6, cl), C#(6, cl)) chord5
+
+    chord(C#(3, cl), C#(4, cl)) lchord1
+    chord(C(3, cl), C(4, cl)) lchord2
+    chord(B(2, cl), B(3, cl)) lchord3
+
+    TRACK RightHand : PIANO {
+        I(sc), G#(3), C#, E, G#, C#, E, G#, C#(5), E, G#, C#(5), E(5), E, C#(5), E(5),
+        G#(5), C#(5), E(5), G#(5), C#(6), E(5), G#(5), C#(6), E(6), G#(5), C#(6), E(6), chord1, chord1,
+        
+        I(sc), G#(3), C, D#, G#, C, D#, G#, C(5), D#, G#, C(5), D#(5), G#, C(5), D#(5),
+        G#(5), C(5), D#(5), G#(5), C(6), D#(5), G#(5), C(6), D#(6), G#(5), C(6), D#(6), chord2, chord2,
+
+        I(sc), C#, F, G#, C#(5), F, G#, C#(5), F(5), G#, C#(5), F(5), G#(5), C#(5), F(5), G#(5),
+        C#(6), F(5), G#(5), C#(6), F(6), G#(5), C#(6), F(6), G#(6), C#(6), F(6), G#(6), chord3, chord3,
+
+        I(sc), C#, F#, A, C#(5), C#(5), F#(5), A(5), C#(6), C#(6), F#(6), A(6), chord4, chord4,
+        I(sc), C#, E, G, C#(5), C#(5), E(5), G(5), C#(6), C#(6), E(6), G(6), chord5, chord5
+    }
+    TRACK LeftHand : PIANO {
+        C#(3, cl), G#(3, cl), C#(3, cl), G#(3, cl), C#(3, cl), G#(3, cl), C#(3, cl), G#(3, cl),
+        C#(3, cl), G#(3, cl), C#(3, cl), G#(3, cl), C#(3, cl), G#(3, cl), lchord1, G#(3, cl),
+
+        C(3, cl), G#(3, cl), C(3, cl), G#(3, cl), C(3, cl), G#(3, cl), C(3, cl), G#(3, cl),
+        C(3, cl), G#(3, cl), C(3, cl), G#(3, cl), C(3, cl), G#(3, cl), lchord2, G#(3, cl),
+
+        B(2, cl), G#(3, cl), B(2, cl), G#(3, cl), B(2, cl), G#(3, cl), B(2, cl), G#(3, cl),
+        B(2, cl), G#(3, cl), B(2, cl), G#(3, cl), B(2, cl), G#(3, cl), lchord3, G#(3, cl),
+
+        A(3, cl), A(4, cl), A(3, cl), A(4, cl), A(3, cl), A(4, cl), A(3, cl), A(4, cl),
+        A(3, cl), A(4, cl), A(3, cl), A(4, cl), A(3, cl), A(4, cl), A(3, cl), A(4, cl) 
+    }
+
+}
